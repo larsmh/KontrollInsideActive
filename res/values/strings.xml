@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kontroll Inside Active</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_log_out">Logg ut</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nei</string>
+    <string name="regvask">Oppdrag utført</string>
+    <string name="sendMsg">Send avviksmelding</string>
+    <string name="abort">Avbryt</string>
+    <string name="message">Melding</string>
+
+    <color name="red">#F05149</color>
+    <color name="grey">#9c9c9c</color>
+    <color name="grey2">#DDDDDD</color>
+
+    <string name="title_activity_quality_report">QualityReportActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="quality_report_dialog">Velg kvalitetsrapport</string>
+    <string name="cancel">Avbryt</string>
+    <string name="ok">Ok</string>
+    <string-array name="quality_report_types">
+        <item>Barnehage</item>
+        <item>Butikk</item>
+        <item>Eiendomsdrift</item>
+        <item>Helsebygg</item>
+        <item>Næringsbygg</item>
+        <item>Standard</item>
+        
+    </string-array>
+
+    <string-array name = "standard_quality_report_types">
+        <item>Standard kvalitetsrapport</item>
+        <item>Oppstartsrapport</item>
+    </string-array>
+    
+</resources>
