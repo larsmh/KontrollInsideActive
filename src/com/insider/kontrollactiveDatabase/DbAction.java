@@ -13,7 +13,7 @@ public class DbAction {
 	
 	public void retrieveCustomers(){	
 		query = "SELECT * FROM customer WHERE department='"+Globals.user.getDepartment()+"'";
-		new RetrieveCustomers().execute(url, user, pw, query);
+		new RetrieveCustomers().execute(Globals.user.getDepartment());
 	}
 	
 	public void registerJob(String customer, String date){
@@ -25,7 +25,8 @@ public class DbAction {
 	
 	public void retrieveUser(String phonenr){
 		query = "SELECT * FROM employee WHERE phonenr='"+phonenr+"'";
-		new RetrieveUser().execute(url, user, pw, query);
+		//new RetrieveUser().execute(url, user, pw, query);
+		new RetrieveUser().execute(phonenr);
 	}
 	
 }
