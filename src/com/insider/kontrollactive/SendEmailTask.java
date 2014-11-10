@@ -8,9 +8,9 @@ import android.os.AsyncTask;
 
 public class SendEmailTask extends AsyncTask<Void, Void, Void> {
 
-	ArrayList<Mail> emailList;
+	ArrayList<Email> emailList;
 	
-	public SendEmailTask(ArrayList<Mail> emailList) {
+	public SendEmailTask(ArrayList<Email> emailList) {
 		this.emailList = emailList;
 	}
     	

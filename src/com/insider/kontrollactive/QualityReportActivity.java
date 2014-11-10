@@ -24,8 +24,12 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,9 +49,10 @@ public class QualityReportActivity extends ActionBarActivity {
 	String date, msg;
 	Document document;
 	Customer cust;
-	ArrayList<Mail> emailList;
-	int code;
-	boolean attachement = true;
+	ArrayList<Email> emailList;
+	int code, choiceNumber;
+	int type = 3;
+	String attachement;
 	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
 	private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -59,21 +64,31 @@ public class QualityReportActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quality_report);
 		
-		attachement = true;
+		Intent intent = getIntent();
+		choiceNumber = Integer.parseInt(intent.getStringExtra("choice"));
+		
+		switch (choiceNumber) {
+		case 0:
+			setContentView(R.layout.activity_quality_report);
+			break;
+
+		default:
+			break;
+		}
+		
 		emailList = Globals.emaiList;
 		date = new com.insider.kontrollactiveModel.Date().getDate();
 		msg = "k";
 		
 		makePDF = (Button) findViewById(R.id.makePDF);
-		Intent intent = getIntent();
-		int choiceNumber = Integer.parseInt(intent.getStringExtra("choice"));
+		
 		Bundle b = intent.getExtras();
 		cust = b.getParcelable("customerObject");
 		Toast.makeText(this, cust.getEmail(), Toast.LENGTH_LONG).show();
 		
 		String[] choices = getResources().getStringArray(R.array.quality_report_types);
 		
-		this.setTitle("Kvalitetsrapport for "+choices[choiceNumber]);
+		this.setTitle(choices[choiceNumber]);
 
 		dir = getAlbumStorageDir(this, "insider_data");
 		file = new File(dir.getAbsolutePath()+"/"+cust.getEmail()+".pdf");
@@ -113,7 +128,7 @@ public class QualityReportActivity extends ActionBarActivity {
 	      e.printStackTrace();
 	   }
 	
-		EmailGenerator gen = new EmailGenerator(this, cust, date,msg, emailList,attachement);
+		EmailGenerator gen = new EmailGenerator(this, cust, date,msg, emailList,attachement, type);
 		gen.sendEmail();
 	}
 	
@@ -271,8 +286,7 @@ public class QualityReportActivity extends ActionBarActivity {
 		    return file;
 		}
   	
-  	
-	
+		
 }
 
 
