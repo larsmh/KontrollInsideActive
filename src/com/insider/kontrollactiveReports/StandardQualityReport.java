@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,19 +30,17 @@ import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
 import com.insider.kontrollactiveModel.User;
-import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.TextField;
 
 public class StandardQualityReport extends ActionBarActivity {
 
 	static final int REQUEST_TAKE_PHOTO = 1;
 	ArrayList<File> pictureList;
 	ArrayList<Email> emailList;
+	String[] checkBoxChoices;
 	String picturePath, attachementPath;
 	String date;
 	Customer cust;
@@ -56,6 +55,7 @@ public class StandardQualityReport extends ActionBarActivity {
 	Spinner gulv_tepper_spinner, gulv_harde_spinner, sekundare_flater_spinner, hygiene_sanitar_spinner, miljo_inside_spinner,lunsj_inside_spinner, forskjell_etter_inside_spinner,
 	fornoyd_med_inside_spinner, medarbeidere_question_spinner;
 	Button camera_button, pdf_button;
+	RadioButton arbeidsplassmappe_ja, arbeidsplassmappe_nei;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -119,7 +119,11 @@ public class StandardQualityReport extends ActionBarActivity {
 	}
 	
 	public void createPDF() throws IOException, DocumentException{
+		int  arbeidsplassMappeSelected = radio_arbeidsplassmappe.getCheckedRadioButtonId();
+		String text = "";
 		Log.d("!!", cust.getName());
+		
+		
 		String src = Environment.getExternalStorageDirectory()
                  + "/insider_data/rapport_standard.pdf";
          String dst = Environment.getExternalStorageDirectory()
@@ -130,19 +134,54 @@ public class StandardQualityReport extends ActionBarActivity {
          
          AcroFields form = stamper.getAcroFields();
 
-         form.setField("date_in_header_field", cust.getName());
-         form.setFieldProperty("data_in_header_field", "setfflags", TextField.READ_ONLY, null);
-         form.setField("executor_field", cust.getName());
-         form.setFieldProperty("executor_field", "setfflags", TextField.READ_ONLY, null);
+         form.setField("date_in_header_field", date);
+         form.setField("executor_field", "Thomas");
          form.setField("customer_field", cust.getName());
-         form.setField("department_field", cust.getName());
-         form.setField("type_of_report_field", cust.getName());
-
+         form.setField("department_field", cust.getDepartment());
+         form.setField("type_of_report_field", "Standard kvalitetsrapport");
+         form.setField("date_in_body_field", date);
+        
+         Log.d("!!text", ""+arbeidsplassmappe_ja.isChecked());
+         if(arbeidsplassMappeSelected == 0){
+        	String[] values = form.getAppearanceStates("arbeidsplassmappe_box_yes");
+        	form.setField("arbeidsplassmappe_box_yes","Yes");
+         }
+         else{
+        	 String[] values = form.getAppearanceStates("arbeidsplassmappe_box_no");
+        	 form.setField("arbeidsplassmappe_box_no", "Yes");
+         }
+         form.setField("contact_field", kontaktperson_text.getText().toString());
+         
+         text = gulv_tepper_spinner.getSelectedItem().toString();
+         Log.d("!!text",text);
+         if(text != "Ingen valg" || text != ""){
+    		 form.setField("floor_carpets_field", text);
+        	 String[] values = form.getAppearanceStates("floor_carpet_box");
+        	 form.setField("floor_carpet_box", "Yes");
+         }
+         
+//         text = gulv_harde_spinner.getSelectedItem().toString();
+//         if(text != "Ingen valg"){
+//    		 form.setField("floor_hard_field", text);
+//        	 String[] values = form.getAppearanceStates("floor_hard_box");
+//        	 form.setField("floor_hard_box", "Yes");
+//         }
+         
          stamper.setFormFlattening(true);
          stamper.close();
          reader.close();
          attachementPath = dst;
         
+	}
+	
+	public void getCheckBoxValue(String src, String[] values) throws IOException{
+		PdfReader reader = new PdfReader(src);
+        AcroFields fields = reader.getAcroFields();
+        StringBuffer sb = new StringBuffer();
+        for (String value : values) {
+            sb.append(value);
+            sb.append('\n');
+        }
 	}
 	
 	private void dispatchTakePictureIntent() {
@@ -210,6 +249,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		
 	}
 	
+	
 	public void identifyEditText(){
 		
 		kontaktperson_text = (EditText) findViewById(R.id.kontaktperson_text);
@@ -254,6 +294,14 @@ public class StandardQualityReport extends ActionBarActivity {
 		
 		
 	}
+	
+	public void identifyRadioButtons(){
+		
+		arbeidsplassmappe_ja = (RadioButton) findViewById(R.id.arbeidsplassmappe_yes);
+		arbeidsplassmappe_nei = (RadioButton) findViewById(R.id.arbeidsplassmappe_no);
+		
+	}
+	
 	
 	public void identifyRadioGroup(){
 		radio_arbeidsplassmappe = (RadioGroup) findViewById(R.id.radio_arbeidsplassmappe);
