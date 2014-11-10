@@ -24,8 +24,8 @@ public class DbAction {
 	}
 	
 	public void retrieveUser(String phonenr){
-		//query = "SELECT * FROM employee WHERE phonenr='"+phonenr+"'";
-		new RetrieveUser().execute(phonenr);
+		query = "SELECT * FROM employee WHERE phonenr='"+phonenr+"'";
+		new RetrieveUser().execute(url, user, pw, query);
 	}
 	
 }

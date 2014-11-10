@@ -3,6 +3,7 @@ package com.insider.kontrollactive;
 import java.util.ArrayList;
 
 import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveReports.StandardQualityReport;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,14 +15,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class QualityDialog extends DialogFragment{
-
+	Intent intent;
 	Customer cust;
-	ArrayList<Mail> emailList;
-	public QualityDialog(Customer cust, ArrayList<Mail> emailList) {
+	ArrayList<Email> emailList;
+	public QualityDialog(Customer cust, ArrayList<Email> emailList) {
 		this.emailList = emailList;
 		this.cust = cust;
-		
 	}
+	
 	
 	  @Override
 	    public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,15 +32,56 @@ public class QualityDialog extends DialogFragment{
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Log.d("!!", "which = "+which);
-			    	Intent intent = new Intent(getActivity(), QualityReportActivity.class);
-			    	intent.putExtra("choice", ""+which);
-			    	intent.putExtra("customerObject", cust);
-			    	startActivity(intent);
-			    	
-			    	if(which == 5){
-			    		new standardQualityReportDialog();
-			    	}
+					
+					switch (which) {
+					case 0:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.StandardQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					case 1:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.OppstartQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					case 2:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.BarnehageQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					case 3:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.ButikkQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					case 4:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.EiendomsdriftQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					case 5:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.HelsebyggQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					case 6:
+						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.NaeringsbyggQualityReport.class);
+						intent.putExtra("choice", ""+which);
+						intent.putExtra("customerObject", cust);
+						startActivity(intent);
+						break;
+					default:
+						break;
+					}
+					
+					
+			    
 				}
 			});
 	      
@@ -50,34 +92,7 @@ public class QualityDialog extends DialogFragment{
 	               });
 	        // Create the AlertDialog object and return it
 	        return builder.create();
-	  }
-	 
-	  public class standardQualityReportDialog  extends DialogFragment{
-		  
-		  public Dialog onCreateDialog(Bundle savedInstanceState){
-			
-			  AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		      builder.setItems(R.array.standard_quality_report_types, new DialogInterface.OnClickListener() {
-			  
-		    	  @Override
-					public void onClick(DialogInterface dialog, int which) {
-						
-		    		  	if(which == 0) which = 6;
-		    		  	else which = 7;
-		    		  
-				    	Intent intent = new Intent(getActivity(), QualityReportActivity.class);
-				    	intent.putExtra("choice", ""+which);
-				    	intent.putExtra("customerObject", cust);
-				    	startActivity(intent);
-				    	
-				    	
-					}
-				});
-		    	  
-		    	  
-			  return builder.create();
-			  
-		  }
-		  
-	  }
+	  }  
+	  
+	    
 }
