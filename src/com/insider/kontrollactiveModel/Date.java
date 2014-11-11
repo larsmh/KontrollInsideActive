@@ -7,7 +7,7 @@ public class Date {
 	String date;
 	public Date() {
 		Calendar c = Calendar.getInstance();
-    	date=c.get(Calendar.DATE)+"."+(c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR)+" "
+    	date=c.get(Calendar.DATE)+"."+(c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR)+"-"
     			+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
 	}
 	
