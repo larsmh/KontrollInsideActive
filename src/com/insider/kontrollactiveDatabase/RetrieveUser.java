@@ -33,7 +33,7 @@ public class RetrieveUser extends AsyncTask<String, Integer, Long> {
 
 	@Override
 	protected Long doInBackground(String... params) {
-        String url="http://192.168.1.31:8080/insider/user?pnr="+params[0];
+        String url="http://192.168.1.4:8080/insider/user?pnr="+params[0];
         Log.d("!!!!", url);
         try {
  

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -47,20 +48,24 @@ public class StandardQualityReport extends ActionBarActivity {
 	User user;
 	String msg;
 	
+	boolean vinduspuss_check, oppskuring_check, boning_check, hovedrenhold_check, trappevask_check, okt_frekvens_check;
+	
 	RadioGroup radio_arbeidsplassmappe;
 	TextView arbeidsplassmappe, kontaktperson,gulv_tepper,gulv_harde,kommentar_gulv, sekundare_flater,kommentar_sekundare_flater,hygiene_sanitar, 
 	kommentar_hygiene_sanitar, miljo_insider, kommentar_miljo_insider, lunsj_inside, kommentar_lunsj_inside, forskjell_etter_insider, fornoyd_med_insider,
-	medarbeidere_question, generell_kommentar;
+	medarbeidere_question, generell_kommentar, anbefalt_tillegg;
 	EditText kontaktperson_text, kommentar_gulv_text, kommentar_sekundare_flater_text, hygiene_sanitar_text, lunsj_inside_text, generell_kommentar_text;
 	Spinner gulv_tepper_spinner, gulv_harde_spinner, sekundare_flater_spinner, hygiene_sanitar_spinner, miljo_inside_spinner,lunsj_inside_spinner, forskjell_etter_inside_spinner,
 	fornoyd_med_inside_spinner, medarbeidere_question_spinner;
 	Button camera_button, pdf_button;
 	RadioButton arbeidsplassmappe_ja, arbeidsplassmappe_nei;
-	
+	CheckBox vinduspuss, oppskuring, boning, hovedrenhold, trappevask, okt_frekvens;
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.standard_quality_report);
 		this.setTitle("Standard Kvalitetsrapport");
+		
+		
 		
 		msg = "";
 		date = new Date().getDate();
@@ -71,10 +76,12 @@ public class StandardQualityReport extends ActionBarActivity {
 		Bundle b = intent.getExtras();
 		cust = b.getParcelable("customerObject");
 		user = b.getParcelable("userObject");
+		
 		identifyTextView();
 		identifyEditText();
 		identifySpinners();
 		identifyRadioGroup();
+		identifyRadioButtons();
 		identifyButtons();
 		
 		camera_button.setOnClickListener(new OnClickListener() {
@@ -116,6 +123,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type);
 		gen.sendEmail();
 		
+		finish();
 	}
 	
 	public void createPDF() throws IOException, DocumentException{
@@ -141,8 +149,9 @@ public class StandardQualityReport extends ActionBarActivity {
          form.setField("type_of_report_field", "Standard kvalitetsrapport");
          form.setField("date_in_body_field", date);
         
-         Log.d("!!text", ""+arbeidsplassmappe_ja.isChecked());
-         if(arbeidsplassMappeSelected == 0){
+         
+         
+         if(arbeidsplassmappe_ja.isChecked()){
         	String[] values = form.getAppearanceStates("arbeidsplassmappe_box_yes");
         	form.setField("arbeidsplassmappe_box_yes","Yes");
          }
@@ -150,22 +159,146 @@ public class StandardQualityReport extends ActionBarActivity {
         	 String[] values = form.getAppearanceStates("arbeidsplassmappe_box_no");
         	 form.setField("arbeidsplassmappe_box_no", "Yes");
          }
+
          form.setField("contact_field", kontaktperson_text.getText().toString());
          
          text = gulv_tepper_spinner.getSelectedItem().toString();
          Log.d("!!text",text);
-         if(text != "Ingen valg" || text != ""){
+         if(text.equals("Ingen valg")){
     		 form.setField("floor_carpets_field", text);
-        	 String[] values = form.getAppearanceStates("floor_carpet_box");
+//        	 String[] values = form.getAppearanceStates("floor_carpet_box");
+        	 
+         }
+         
+         else{
+        	 form.setField("floor_carpets_field", text);
         	 form.setField("floor_carpet_box", "Yes");
          }
          
-//         text = gulv_harde_spinner.getSelectedItem().toString();
-//         if(text != "Ingen valg"){
-//    		 form.setField("floor_hard_field", text);
-//        	 String[] values = form.getAppearanceStates("floor_hard_box");
-//        	 form.setField("floor_hard_box", "Yes");
-//         }
+         text = gulv_harde_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("floor_hard_field", text); 
+         }
+         
+         else{
+        	 form.setField("floor_hard_field", text);
+        	 form.setField("floor_hard_box", "Yes");
+         }
+         
+         form.setField("comments_floor_field", kommentar_gulv.getText().toString());
+         
+         text = sekundare_flater_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("sec_surface_field", text); 
+         }
+         
+         else{
+        	 form.setField("sec_surface_field", text);
+        	 form.setField("seq_surface_box", "Yes");
+         }
+         
+         form.setField("comments_sec_surface_field", kommentar_sekundare_flater_text.getText().toString());
+         
+         text = hygiene_sanitar_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("hygene_field", text); 
+         }
+         
+         else{
+        	 form.setField("hygene_field", text);
+        	 form.setField("hygene_box", "Yes");
+         }
+         
+         form.setField("comments_hygene_field", kommentar_hygiene_sanitar.getText().toString());
+         
+         text = miljo_inside_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("environment_field", text); 
+         }
+         
+         else{
+        	 form.setField("environment_field", text);
+        	 form.setField("environment_box", "Yes");
+         }
+         
+         form.setField("comments_environment_field", kommentar_miljo_insider.getText().toString());
+         
+         text = lunsj_inside_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("lunsj_insider_field", text); 
+         }
+         
+         else{
+        	 form.setField("lunsj_insider_field", text);
+        	 form.setField("lunsj_insider_box", "Yes");
+         }
+                  
+         form.setField("comments_lunsj_insider_field", kommentar_lunsj_inside.getText().toString());
+         
+         text = forskjell_etter_inside_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("insider_lev_field", text); 
+         }
+         
+         else{
+        	 form.setField("insider_lev_field", text);
+        	 form.setField("isndier_lev_box", "Yes");
+         }
+         
+         
+         text = fornoyd_med_inside_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("happy_insider_field", text); 
+         }
+         
+         else{
+        	 form.setField("happy_insider_field", text);
+        	 form.setField("happy_insider_box", "Yes");
+         }
+         
+         text = medarbeidere_question_spinner.getSelectedItem().toString();        
+         if(text.equals("Ingen valg")){
+    		 form.setField("service_question_field", text); 
+         }
+         
+         else{
+        	 form.setField("service_question_field", text);
+        	 form.setField("service_question_box", "Yes");
+         }
+         
+         form.setField("general_comments_field", generell_kommentar_text.getText().toString());
+         
+         form.setField("vinduspuss_field", "Vinduspuss");
+         form.setField("oppskuring_field", "Oppskuring");
+         form.setField("boning_field", "Boning");
+         form.setField("hovedrenhold_field", "Hovedrenhold");
+         form.setField("trappevask_field", "Trappevask");
+         form.setField("økt_frekvens_field", "Økt frekvens");
+         
+         
+         if(vinduspuss_check){
+        	 form.setField("vinduspuss_box", "Yes");
+         }
+         
+         if(oppskuring_check){
+        	 form.setField("oppskuring_box", "Yes");
+         }
+         
+         if(boning_check){
+        	 form.setField("boning_box", "Yes");
+         }
+         
+         if(hovedrenhold_check){
+        	 form.setField("hovedrenhold_box", "Yes");
+         }
+         
+         if(trappevask_check){
+        	 form.setField("trappevask_box", "Yes");
+         }
+         
+         if(okt_frekvens_check){
+        	 form.setField("økt_frekvens_box", "Yes");
+         }
          
          stamper.setFormFlattening(true);
          stamper.close();
@@ -174,14 +307,33 @@ public class StandardQualityReport extends ActionBarActivity {
         
 	}
 	
-	public void getCheckBoxValue(String src, String[] values) throws IOException{
-		PdfReader reader = new PdfReader(src);
-        AcroFields fields = reader.getAcroFields();
-        StringBuffer sb = new StringBuffer();
-        for (String value : values) {
-            sb.append(value);
-            sb.append('\n');
-        }
+	public void onCheckboxClicked(View view) {
+		
+		boolean checked = ((CheckBox) view).isChecked();
+		
+		switch (view.getId()) {
+		case R.id.vinduspuss_felt:
+			vinduspuss_check = true;
+			break;
+
+		case R.id.oppskuring_felt:
+			oppskuring_check = true;
+			break;
+		case R.id.boning_felt:
+			boning_check = true;
+			break;
+		case R.id.hovedrenhold_felt:
+			hovedrenhold_check = true;
+			break;
+		case R.id.trappevask_felt:
+			trappevask_check = true;
+			break;
+		case R.id.okt_frekvens_felt:
+			okt_frekvens_check = true;
+		default:
+			break;
+		}
+		
 	}
 	
 	private void dispatchTakePictureIntent() {
@@ -245,10 +397,19 @@ public class StandardQualityReport extends ActionBarActivity {
 		fornoyd_med_insider =  (TextView)findViewById(R.id.fornoyd_med_insider);
 		medarbeidere_question  = (TextView)findViewById(R.id.medarbeidere_question);
 		generell_kommentar = (TextView)findViewById(R.id.generell_kommentar);
+		anbefalt_tillegg = (TextView) findViewById(R.id.anbefalt_tillegg);
 		
 		
 	}
 	
+	public void identifyCheckBox(){
+		vinduspuss = (CheckBox) findViewById(R.id.vinduspuss_felt);
+		oppskuring = (CheckBox) findViewById(R.id.oppskuring_felt);
+		boning = (CheckBox) findViewById(R.id.boning_felt);
+		hovedrenhold = (CheckBox) findViewById(R.id.hovedrenhold_felt);
+		trappevask = (CheckBox) findViewById(R.id.trappevask_felt);
+		okt_frekvens = (CheckBox) findViewById(R.id.okt_frekvens_felt);
+	}
 	
 	public void identifyEditText(){
 		
@@ -313,4 +474,5 @@ public class StandardQualityReport extends ActionBarActivity {
 		pdf_button = (Button) findViewById(R.id.generatePDF_button);
 		
 	}
+	
 }

@@ -258,6 +258,7 @@ public class MainActivity extends ActionBarActivity {
 		editor.putString("phonenr", "null");
 		editor.putString("password", "null");
 		editor.putString("dept", "null");
+		editor.putString("name", "null");
 		editor.putBoolean("admin", false);
 		editor.commit();
 		
