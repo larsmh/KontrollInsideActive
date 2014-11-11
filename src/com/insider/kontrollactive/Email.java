@@ -96,11 +96,8 @@ public class Email {
         		String json = "{"+recipient[0]+","+subject+","+body+"}";
         		StringEntity body = new StringEntity(json);
         		body.setContentType("application/json");
-<<<<<<< HEAD
         		HttpPost post = new HttpPost("http://78.91.9.62:8080/insider/email/");
-=======
-        		HttpPost post = new HttpPost("http://192.168.1.4:8080/api/email/");
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
+
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
         		
         		post.setEntity(builder.build());

@@ -16,13 +16,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-<<<<<<< HEAD
-import android.widget.EditText;
-=======
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,69 +31,42 @@ import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
 import com.insider.kontrollactiveModel.User;
-<<<<<<< HEAD
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfCopy;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.TextField;
-=======
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 
 public class StandardQualityReport extends ActionBarActivity {
 
 	static final int REQUEST_TAKE_PHOTO = 1;
 	ArrayList<File> pictureList;
 	ArrayList<Email> emailList;
-<<<<<<< HEAD
-=======
 	String[] checkBoxChoices;
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 	String picturePath, attachementPath;
 	String date;
 	Customer cust;
 	User user;
 	String msg;
-	
-<<<<<<< HEAD
-	RadioGroup radio_arbeidsplassmappe;
-	TextView arbeidsplassmappe, kontaktperson,gulv_tepper,gulv_harde,kommentar_gulv, sekundare_flater,kommentar_sekundare_flater,hygiene_sanitar, 
-	kommentar_hygiene_sanitar, miljo_insider, kommentar_miljo_insider, lunsj_inside, kommentar_lunsj_inside, forskjell_etter_insider, fornoyd_med_insider,
-	medarbeidere_question, generell_kommentar;
-=======
+
 	boolean vinduspuss_check, oppskuring_check, boning_check, hovedrenhold_check, trappevask_check, okt_frekvens_check;
 	
 	RadioGroup radio_arbeidsplassmappe;
 	TextView arbeidsplassmappe, kontaktperson,gulv_tepper,gulv_harde,kommentar_gulv, sekundare_flater,kommentar_sekundare_flater,hygiene_sanitar, 
 	kommentar_hygiene_sanitar, miljo_insider, kommentar_miljo_insider, lunsj_inside, kommentar_lunsj_inside, forskjell_etter_insider, fornoyd_med_insider,
 	medarbeidere_question, generell_kommentar, anbefalt_tillegg;
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
+	
 	EditText kontaktperson_text, kommentar_gulv_text, kommentar_sekundare_flater_text, hygiene_sanitar_text, lunsj_inside_text, generell_kommentar_text;
 	Spinner gulv_tepper_spinner, gulv_harde_spinner, sekundare_flater_spinner, hygiene_sanitar_spinner, miljo_inside_spinner,lunsj_inside_spinner, forskjell_etter_inside_spinner,
 	fornoyd_med_inside_spinner, medarbeidere_question_spinner;
 	Button camera_button, pdf_button;
-<<<<<<< HEAD
 	
-=======
 	RadioButton arbeidsplassmappe_ja, arbeidsplassmappe_nei;
 	CheckBox vinduspuss, oppskuring, boning, hovedrenhold, trappevask, okt_frekvens;
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
+
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.standard_quality_report);
 		this.setTitle("Standard Kvalitetsrapport");
-		
-<<<<<<< HEAD
-=======
-		
-		
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 		msg = "";
 		date = new Date().getDate();
 		pictureList = new ArrayList<File>();
@@ -107,18 +76,11 @@ public class StandardQualityReport extends ActionBarActivity {
 		Bundle b = intent.getExtras();
 		cust = b.getParcelable("customerObject");
 		user = b.getParcelable("userObject");
-<<<<<<< HEAD
-=======
-		
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 		identifyTextView();
 		identifyEditText();
 		identifySpinners();
 		identifyRadioGroup();
-<<<<<<< HEAD
-=======
 		identifyRadioButtons();
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 		identifyButtons();
 		
 		camera_button.setOnClickListener(new OnClickListener() {
@@ -159,13 +121,6 @@ public class StandardQualityReport extends ActionBarActivity {
 		 
 		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type);
 		gen.sendEmail();
-		
-<<<<<<< HEAD
-	}
-	
-	public void createPDF() throws IOException, DocumentException{
-		Log.d("!!", cust.getName());
-=======
 		finish();
 	}
 	
@@ -173,9 +128,6 @@ public class StandardQualityReport extends ActionBarActivity {
 		int  arbeidsplassMappeSelected = radio_arbeidsplassmappe.getCheckedRadioButtonId();
 		String text = "";
 		Log.d("!!", cust.getName());
-		
-		
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 		String src = Environment.getExternalStorageDirectory()
                  + "/insider_data/rapport_standard.pdf";
          String dst = Environment.getExternalStorageDirectory()
@@ -186,16 +138,6 @@ public class StandardQualityReport extends ActionBarActivity {
          
          AcroFields form = stamper.getAcroFields();
 
-<<<<<<< HEAD
-         form.setField("date_in_header_field", cust.getName());
-         form.setFieldProperty("data_in_header_field", "setfflags", TextField.READ_ONLY, null);
-         form.setField("executor_field", cust.getName());
-         form.setFieldProperty("executor_field", "setfflags", TextField.READ_ONLY, null);
-         form.setField("customer_field", cust.getName());
-         form.setField("department_field", cust.getName());
-         form.setField("type_of_report_field", cust.getName());
-
-=======
          form.setField("date_in_header_field", date);
          form.setField("executor_field", "Thomas");
          form.setField("customer_field", cust.getName());
@@ -354,7 +296,6 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("økt_frekvens_box", "Yes");
          }
          
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
          stamper.setFormFlattening(true);
          stamper.close();
          reader.close();
@@ -362,8 +303,6 @@ public class StandardQualityReport extends ActionBarActivity {
         
 	}
 	
-<<<<<<< HEAD
-=======
 	public void onCheckboxClicked(View view) {
 		
 		boolean checked = ((CheckBox) view).isChecked();
@@ -393,7 +332,6 @@ public class StandardQualityReport extends ActionBarActivity {
 		
 	}
 	
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 	private void dispatchTakePictureIntent() {
 	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    // Ensure that there's a camera activity to handle the intent
@@ -455,16 +393,9 @@ public class StandardQualityReport extends ActionBarActivity {
 		fornoyd_med_insider =  (TextView)findViewById(R.id.fornoyd_med_insider);
 		medarbeidere_question  = (TextView)findViewById(R.id.medarbeidere_question);
 		generell_kommentar = (TextView)findViewById(R.id.generell_kommentar);
-<<<<<<< HEAD
-=======
 		anbefalt_tillegg = (TextView) findViewById(R.id.anbefalt_tillegg);
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
-		
-		
 	}
 	
-<<<<<<< HEAD
-=======
 	public void identifyCheckBox(){
 		vinduspuss = (CheckBox) findViewById(R.id.vinduspuss_felt);
 		oppskuring = (CheckBox) findViewById(R.id.oppskuring_felt);
@@ -474,7 +405,6 @@ public class StandardQualityReport extends ActionBarActivity {
 		okt_frekvens = (CheckBox) findViewById(R.id.okt_frekvens_felt);
 	}
 	
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 	public void identifyEditText(){
 		
 		kontaktperson_text = (EditText) findViewById(R.id.kontaktperson_text);
@@ -520,8 +450,6 @@ public class StandardQualityReport extends ActionBarActivity {
 		
 	}
 	
-<<<<<<< HEAD
-=======
 	public void identifyRadioButtons(){
 		
 		arbeidsplassmappe_ja = (RadioButton) findViewById(R.id.arbeidsplassmappe_yes);
@@ -529,8 +457,6 @@ public class StandardQualityReport extends ActionBarActivity {
 		
 	}
 	
-	
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 	public void identifyRadioGroup(){
 		radio_arbeidsplassmappe = (RadioGroup) findViewById(R.id.radio_arbeidsplassmappe);
 	}
@@ -541,8 +467,4 @@ public class StandardQualityReport extends ActionBarActivity {
 		pdf_button = (Button) findViewById(R.id.generatePDF_button);
 		
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
 }

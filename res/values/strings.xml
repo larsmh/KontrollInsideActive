@@ -40,8 +40,6 @@
     <string name="generell_kommentar">Generell kommentar:</string>
     <string name="generatePDF">Send rapport</string>
     <string name="take_picture">Ta bilde</string>
-<<<<<<< HEAD
-=======
     <string name ="okt_frekvens_felt">Økt frekvens</string>
     <string name="trappevask_felt">Trappevask</string>
     <string name="hovedrenhold_felt">Hovedrenhold</string>
@@ -49,8 +47,6 @@
     <string name="oppskuring_felt">Oppskuring</string>
     <string name="vinduspuss_felt">Vinduspuss</string>
     <string name="anbefalt_tillegg">Anbefalt tillegg:</string>
-        
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
     <string-array name="quality_report_types">
         <item>Standard</item>
         <item>Oppstartsrapport</item>

@@ -27,11 +27,7 @@ public class RetrieveCustomers extends AsyncTask<String, Integer, Long> {
 	
 	@Override
 	protected Long doInBackground(String... params) {
-<<<<<<< HEAD
         String url=params[0]+"customer/?dep="+params[1];
-=======
-        String url="http://192.168.1.4:8080/insider/customer/?dep="+params[0];
->>>>>>> 7c0a1b3d46427de6b39da222b0cda9714c525dc5
         Log.d("!!!!", url);
         try {
  
