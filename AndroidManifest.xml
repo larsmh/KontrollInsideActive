@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="11"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,15 +16,18 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        android:logo="@drawable/in_logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppBaseTheme" >
         <activity
             android:name=".MainActivity"
+            android:logo="@drawable/in_logo"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:logo="@drawable/in_logo"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -37,6 +40,13 @@
             android:name=".QualityReportActivity"
             android:label="@string/title_activity_quality_report" >
         </activity>
+        <activity android:name="com.insider.kontrollactiveReports.StandardQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.OppstartQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.NaeringsbyggQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.HelsebyggQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.EiendomsdriftQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.ButikkQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.BarnehageQualityReport"></activity>
     </application>
 
 </manifest>
