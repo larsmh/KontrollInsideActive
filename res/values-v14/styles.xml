@@ -7,8 +7,13 @@
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         
+        
         <item name="android:textSize">@dimen/text_size</item>
         <!-- API 14 theme customizations can go here. -->
     </style>
+    <style name="CustomActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+    <item name="android:textSize">8sp</item>
+</style>
+
 
 </resources>

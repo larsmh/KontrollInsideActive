@@ -11,29 +11,61 @@
     <string name="sendMsg">Send avviksmelding</string>
     <string name="abort">Avbryt</string>
     <string name="message">Melding</string>
-
+	<string name ="arbeidsplassmappe">Arbeidsplassmappe</string>
     <color name="red">#F05149</color>
     <color name="grey">#9c9c9c</color>
     <color name="grey2">#DDDDDD</color>
 
     <string name="title_activity_quality_report">QualityReportActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="quality_report_dialog">Velg kvalitetsrapport</string>
+   
     <string name="cancel">Avbryt</string>
     <string name="ok">Ok</string>
+    
+    <string name="quality_report_dialog">Velg kvalitetsrapport</string>
+    <string name="kontaktperson_text">Kontaktperson hos kunde:</string>
+    <string name="gulv_tepper">Gulv - tepper:</string>
+    <string name="gulv_hard">Gulv - harde:</string>
+    <string name="kommentar_gulv">Kommentar gulv:</string>
+    <string name="sekundare_flater">Sekundære flater - bord,hyller, etc:</string>
+    <string name="hygiene_sanitar">Hygiene / sanitær etc:</string>
+    <string name="kommentar_hygiene_sanitar">Kommentar hygiene / sanitær:</string>
+    <string name="miljo_insider">MILJØ Insider</string>
+    <string name="kommentar_miljo_insider">Kommentar MILJØ Insider</string>
+    <string name="lunsj_inside">Lunsj Inside - serviceinnstilling/mottak bestilling</string>
+    <string name="kommentar_lunsj_inside">Kommentar Lunsj Inside</string>
+    <string name="forskjell_etter_insider">Merker du forskjell etter at Insider ble din leverandør?</string>
+    <string name="fornoyd_med_insider">Er du fornøyd med Insiders service?</string>
+    <string name="medarbeidere_question">Er våre medarbeidere positive/vennlige og serviceinnstilte?</string>
+    <string name="generell_kommentar">Generell kommentar:</string>
+    <string name="generatePDF">Send rapport</string>
+    <string name="take_picture">Ta bilde</string>
     <string-array name="quality_report_types">
+        <item>Standard</item>
+        <item>Oppstartsrapport</item>
         <item>Barnehage</item>
         <item>Butikk</item>
         <item>Eiendomsdrift</item>
         <item>Helsebygg</item>
         <item>Næringsbygg</item>
-        <item>Standard</item>
         
     </string-array>
 
-    <string-array name = "standard_quality_report_types">
-        <item>Standard kvalitetsrapport</item>
-        <item>Oppstartsrapport</item>
+    <string-array name = "normal_spinner_choices">
+        <item>Ingen valg</item>
+        <item>Ikke relevant</item>
+        <item>Godkjent</item>
+        <item>Ikke Godkjent</item>
     </string-array>
+    
+    <string-array name = "extended_spinner_choices">
+        <item>Ingen valg</item>
+        <item>Meget misfornøyd</item>
+        <item>Misfornøyd</item>
+        <item>verken eller</item>
+        <item>Fornøyd</item>
+        <item>Meget fornøyd</item>
+    </string-array>
+    
     
 </resources>

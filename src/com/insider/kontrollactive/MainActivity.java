@@ -2,14 +2,14 @@ package com.insider.kontrollactive;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import com.insider.kontrollactiveDatabase.CustomerListDB;
 import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.CustomerList;
+import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
-
 import android.support.v7.app.ActionBarActivity;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -42,27 +42,29 @@ public class MainActivity extends ActionBarActivity {
 	private AutoCompleteTextView custSelect;
 	private EditText msgText;
 	private Button regButton, msgButton;
-	public ArrayList<Mail> emailList;
+	public ArrayList<Email> emailList;
 	EmailPrep prepper;
 	Customer cust;
-	boolean attachement;
+	String attachement;
 	private String date, msg;
+	int type = 0;
 	DbAction db;
 	
-	@Override
+	
     protected void onCreate(Bundle savedInstanceState) {
-
-        Globals.custDB = new CustomerListDB(this);
+        
+		Globals.custDB = new CustomerListDB(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        attachement = false;
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.in_logo);
+        attachement ="";
         emailList = Globals.emaiList;
         custSelect = (AutoCompleteTextView) findViewById(R.id.custselect);
         
         IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT);
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        this.registerReceiver(this.receiver, filter);  
+//        this.registerReceiver(this.receiver, filter);  
         
         final ActionBarActivity a = this;
         
@@ -130,6 +132,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	
     public void register(View view){
+    	
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
@@ -138,10 +141,11 @@ public class MainActivity extends ActionBarActivity {
     		return;
     	}
     	String title="Registrering av oppdrag";
-    	String message="Er du sikker pï¿½ at du vil registrere dette oppdraget?";
+    	String message="Er du sikker på at du vil registrere dette oppdraget?";
     	if(msgText.isShown()){
     		title="Sending av avviksmelding";
-    		message="Er du sikker pï¿½ at du vil sende avviksmeldingen?";
+    		message="Er du sikker på at du vil sende avviksmeldingen?";
+    		type = 1;
     	}	
     	new AlertDialog.Builder(this)
     	.setTitle(title)
@@ -151,7 +155,6 @@ public class MainActivity extends ActionBarActivity {
         		try {
 					finishRegistration();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
         	}
@@ -164,19 +167,21 @@ public class MainActivity extends ActionBarActivity {
         .show();
     }
     private void finishRegistration() throws Exception{
-    	
+    	    	
     	//Sending email
-    	String msg="";
+    	date = new Date().getDate();
+    	msg=msgText.getText().toString();
+    	Log.d("!!msg", "Message: "+msg);
     	if(msgText.isShown()){
     		msg=msgText.getText().toString();
-    		
     		}
     	else{
-    	db = new DbAction();
-    	db.registerJob(cust.getName(), date);
+	    	db = new DbAction();
+	    	db.registerJob(cust.getName(), date);
     	}
+    	Log.d("!!inne i finish","lol");
     	
-    	EmailGenerator gen = new EmailGenerator(this,cust,date,msg,emailList,attachement);
+    	EmailGenerator gen = new EmailGenerator(this,cust,date,msg,emailList,attachement,type);
     	gen.sendEmail();
     	msgText.setText("");
     	setMsgInvisible();
@@ -207,10 +212,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+    	getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -219,7 +223,7 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    	int id = item.getItemId();
         if (id == R.id.action_log_out) {
         	new AlertDialog.Builder(this)
         	.setTitle("Utlogging")
@@ -262,34 +266,34 @@ public class MainActivity extends ActionBarActivity {
 		startActivity(intent);
     }
     
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) { 
-        	
-        	 EmailPrep prepper = new EmailPrep(emailList, cust, date, context, msg,attachement);
-        	 ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-             if (connec != null && 
-                 (connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) || 
-                 (connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED)){ 
-             	
-            	 	try {
-						prepper.setEmailListContent();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-             	
-            	 	new SendEmailTask(emailList).execute();
-                
-            	if(emailList.size() > 0)
-            		Toast.makeText(getApplicationContext(), "Email sendt!", Toast.LENGTH_SHORT).show();
-            	
-             	
-             }
-        	
-        	
-        }
-      }; 
+//    private BroadcastReceiver receiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) { 
+//        	
+//        	 EmailPrep prepper = new EmailPrep(emailList, cust, date, context, msg,attachement);
+//        	 ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+//             if (connec != null && 
+//                 (connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) || 
+//                 (connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED)){ 
+//             	
+//            	 	try {
+//						prepper.setEmailListContent();
+//					} catch (Exception e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//             	
+//            	 	new SendEmailTask(emailList).execute();
+//                
+//            	if(emailList.size() > 0)
+//            		Toast.makeText(getApplicationContext(), "Email sendt!", Toast.LENGTH_SHORT).show();
+//            	
+//             	
+//             }
+//        	
+//        	
+//        }
+//      }; 
     
     public void quality(View v){
     	cust = getCustomer(custSelect.getText().toString());
