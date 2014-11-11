@@ -40,6 +40,13 @@
             android:name=".QualityReportActivity"
             android:label="@string/title_activity_quality_report" >
         </activity>
+        <activity android:name="com.insider.kontrollactiveReports.StandardQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.OppstartQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.NaeringsbyggQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.HelsebyggQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.EiendomsdriftQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.ButikkQualityReport"></activity>
+        <activity android:name="com.insider.kontrollactiveReports.BarnehageQualityReport"></activity>
     </application>
 
 </manifest>

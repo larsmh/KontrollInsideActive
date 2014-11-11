@@ -230,6 +230,50 @@
            	     android1:ems="10"
            	     android1:inputType="textMultiLine" />
 
+
+           	 <TextView
+                android1:id="@+id/anbefalt_tillegg"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/anbefalt_tillegg" />
+           	 
+           	 <CheckBox
+                android1:id="@+id/vinduspuss_felt"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/vinduspuss_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android1:id="@+id/oppskuring_felt"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/oppskuring_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android1:id="@+id/boning_felt"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/boning_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android1:id="@+id/hovedrenhold_felt"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/hovedrenhold_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android1:id="@+id/trappevask_felt"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/trappevask_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android1:id="@+id/okt_frekvens_felt"
+                android1:layout_width="wrap_content"
+                android1:layout_height="wrap_content"
+                android1:text="@string/okt_frekvens_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 
            	 <RelativeLayout
            	     android1:layout_width="match_parent"
            	     android1:layout_height="wrap_content" >
