@@ -3,6 +3,7 @@ package com.insider.kontrollactiveReports;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import android.content.Intent;
@@ -32,7 +33,12 @@ import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
 import com.insider.kontrollactiveModel.User;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
@@ -41,6 +47,7 @@ public class StandardQualityReport extends ActionBarActivity {
 	static final int REQUEST_TAKE_PHOTO = 1;
 	ArrayList<File> pictureList;
 	ArrayList<Email> emailList;
+	ArrayList<String> stringList;
 	String[] checkBoxChoices;
 	String picturePath, attachementPath;
 	String date;
@@ -55,7 +62,8 @@ public class StandardQualityReport extends ActionBarActivity {
 	kommentar_hygiene_sanitar, miljo_insider, kommentar_miljo_insider, lunsj_inside, kommentar_lunsj_inside, forskjell_etter_insider, fornoyd_med_insider,
 	medarbeidere_question, generell_kommentar, anbefalt_tillegg;
 	
-	EditText kontaktperson_text, kommentar_gulv_text, kommentar_sekundare_flater_text, hygiene_sanitar_text, lunsj_inside_text, generell_kommentar_text;
+	EditText kontaktperson_text, kommentar_gulv_text, kommentar_sekundare_flater_text, hygiene_sanitar_text, lunsj_inside_text, generell_kommentar_text, miljo_insider_text;
+	
 	Spinner gulv_tepper_spinner, gulv_harde_spinner, sekundare_flater_spinner, hygiene_sanitar_spinner, miljo_inside_spinner,lunsj_inside_spinner, forskjell_etter_inside_spinner,
 	fornoyd_med_inside_spinner, medarbeidere_question_spinner;
 	Button camera_button, pdf_button;
@@ -71,6 +79,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		date = new Date().getDate();
 		pictureList = new ArrayList<File>();
 		emailList = Globals.emaiList;
+		stringList = new ArrayList<String>();
 		
 		Intent intent = getIntent();
 		Bundle b = intent.getExtras();
@@ -181,7 +190,7 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("floor_hard_box", "Yes");
          }
          
-         form.setField("comments_floor_field", kommentar_gulv.getText().toString());
+         form.setField("comments_floor_field", kommentar_gulv_text.getText().toString());
          
          text = sekundare_flater_spinner.getSelectedItem().toString();        
          if(text.equals("Ingen valg")){
@@ -205,7 +214,7 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("hygene_box", "Yes");
          }
          
-         form.setField("comments_hygene_field", kommentar_hygiene_sanitar.getText().toString());
+         form.setField("comments_hygene_field", hygiene_sanitar_text.getText().toString());
          
          text = miljo_inside_spinner.getSelectedItem().toString();        
          if(text.equals("Ingen valg")){
@@ -217,7 +226,7 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("environment_box", "Yes");
          }
          
-         form.setField("comments_environment_field", kommentar_miljo_insider.getText().toString());
+         form.setField("comments_environment_field", miljo_insider_text.getText().toString());
          
          text = lunsj_inside_spinner.getSelectedItem().toString();        
          if(text.equals("Ingen valg")){
@@ -229,7 +238,7 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("lunsj_insider_box", "Yes");
          }
                   
-         form.setField("comments_lunsj_insider_field", kommentar_lunsj_inside.getText().toString());
+         form.setField("comments_lunsj_insider_field", lunsj_inside_text.getText().toString());
          
          text = forskjell_etter_inside_spinner.getSelectedItem().toString();        
          if(text.equals("Ingen valg")){
@@ -296,11 +305,65 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("økt_frekvens_box", "Yes");
          }
          
+         
+         if(pictureList.size() != 0){
+        	 addPicturesToPDF(reader, stamper);
+         }
+                 
          stamper.setFormFlattening(true);
          stamper.close();
          reader.close();
          attachementPath = dst;
         
+	}
+	
+	public void addPicturesToPDF(PdfReader reader, PdfStamper stamper) throws MalformedURLException, IOException, DocumentException{
+		stamper.insertPage(reader.getNumberOfPages() + 1, reader.getPageSizeWithRotation(1));
+		PdfContentByte overContent = stamper.getOverContent(2);    
+		
+		int xPos = 50;
+		int yPos = 610;
+		int count = 0;
+		for (int i = 0; i < pictureList.size(); i++) {
+			 Image image1 = Image.getInstance(pictureList.get(i).getAbsolutePath());          
+		     
+			 if(count < 2){
+				 if(count == 1){
+					 xPos += 250;
+					 image1.setAbsolutePosition(xPos,yPos);    
+					 image1.scaleAbsolute(280,200);
+					 ColumnText.showTextAligned(overContent, Element.ALIGN_LEFT, new Phrase( stringList.get(i).toString()), xPos, yPos-10, 0);
+					 count ++;
+				 }
+				 image1.setAbsolutePosition(xPos,yPos);    
+				 image1.scaleAbsolute(240,200);
+				 ColumnText.showTextAligned(overContent, Element.ALIGN_LEFT, new Phrase(stringList.get(i).toString()), xPos, yPos-10, 0);
+				 count++;
+			 }
+			 else{
+				 yPos -= 220;
+				 xPos = 50;
+				 image1.setAbsolutePosition(xPos,yPos);    
+			     image1.scaleAbsolute(240,200);
+			     ColumnText.showTextAligned(overContent, Element.ALIGN_LEFT, new Phrase(stringList.get(i).toString()), xPos, yPos-10, 0);
+			     count = 0;
+			 }
+		        // change the content on top of page 1  
+		        overContent.addImage(image1);
+		        
+			
+			
+//			String img = pictureList.get(i).getAbsolutePath();
+//			InputStream in = getAssets().open(img);
+//			Bitmap bmp = BitmapFactory.decodeStream(in);
+//			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//	        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//	        Image image = Image.getInstance(stream.toByteArray());
+		}
+		
+		for (int i = 0; i < pictureList.size(); i++) {
+			pictureList.get(i).delete();
+		}
 	}
 	
 	public void onCheckboxClicked(View view) {
@@ -350,7 +413,8 @@ public class StandardQualityReport extends ActionBarActivity {
 	                    Uri.fromFile(photoFile));
 	          startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
 	          pictureList.add(photoFile);
-	          Log.d("!!",""+pictureList.size());
+	          stringList.add("bilde."+pictureList.size());
+	          Log.d("!!pic",""+pictureList.size());
 	        }
 	    	}
 	    }
@@ -411,6 +475,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		kommentar_gulv_text= (EditText) findViewById(R.id.kommentar_gulv_text);
 		kommentar_sekundare_flater_text = (EditText) findViewById(R.id.kommentar_sekundare_flater_text);
 		hygiene_sanitar_text = (EditText) findViewById(R.id.hygiene_sanitar_text);
+		miljo_insider_text = (EditText) findViewById(R.id.miljo_insider_text);
 		lunsj_inside_text = (EditText) findViewById(R.id.lunsj_inside_text);
 		generell_kommentar_text = (EditText) findViewById(R.id.generell_kommentar_text);
 		
