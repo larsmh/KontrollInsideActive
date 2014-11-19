@@ -189,7 +189,6 @@ public class MainActivity extends ActionBarActivity {
     
     
     private void updateList(){
-    	Globals.custList = new ArrayList<Customer>();
     	ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
     	if (connec != null && 
                 (connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) || 
@@ -198,6 +197,7 @@ public class MainActivity extends ActionBarActivity {
     		db.retrieveCustomers();
     	}
     	else{
+    		Globals.custList = new ArrayList<Customer>();
     		Globals.custDB.getData();
     	}
     }
