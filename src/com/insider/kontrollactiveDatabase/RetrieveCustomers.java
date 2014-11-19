@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -17,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Globals;
 import com.insider.kontrollactiveModel.User;
 
@@ -44,15 +46,17 @@ public class RetrieveCustomers extends AsyncTask<String, Integer, Long> {
                 builder.append(line).append("\n");
             }
             JSONTokener tokener = new JSONTokener(builder.toString());
-            JSONArray ja = new JSONArray(tokener);
+            JSONArray jArray = new JSONArray(tokener);
             Globals.custDB.clear();
-            for(int i=0; i<ja.length(); i++){
-	            JSONObject jo = ja.getJSONObject(i);
-	        	String name = jo.getString("Name");
-	            String email = jo.getString("Email");
-	        	String dept = jo.getString("Department");
-	        	Globals.custDB.insert(name, email, dept);
-	        	Globals.custList.insert(name, email, dept);
+            Globals.custList = new ArrayList<Customer>();
+            for(int i=0; i<jArray.length(); i++){
+	            JSONObject jObject = jArray.getJSONObject(i);
+	            int id = jObject.getInt("Id");
+	        	String name = jObject.getString("Name");
+	            String email = jObject.getString("Email");
+	        	String dept = jObject.getString("Department");
+	        	Globals.custDB.insert(id, name, email, dept);
+	        	Globals.custList.add(new Customer(id, name, email, dept));
             }
         } catch (Exception e) {
             Log.d("!!!", e.getLocalizedMessage());

@@ -5,7 +5,6 @@ import java.util.Calendar;
 import com.insider.kontrollactiveDatabase.CustomerListDB;
 import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
-import com.insider.kontrollactiveModel.CustomerList;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
 import android.support.v7.app.ActionBarActivity;
@@ -72,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				if(Globals.custList!=null){
-				ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(a, android.R.layout.simple_list_item_single_choice, Globals.custList.getList());
+				ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(a, android.R.layout.simple_list_item_single_choice, Globals.custList);
 				custSelect.setAdapter(adapter);
 				}				
 			}
@@ -190,7 +189,7 @@ public class MainActivity extends ActionBarActivity {
     
     
     private void updateList(){
-    	Globals.custList = new CustomerList();
+    	Globals.custList = new ArrayList<Customer>();
     	ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
     	if (connec != null && 
                 (connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) || 
@@ -204,7 +203,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
     private Customer getCustomer(String name){
-    	for(Customer cust : Globals.custList.getList()){
+    	for(Customer cust : Globals.custList){
     		if(name.equals(cust.getName()))
     			return cust;
     	}

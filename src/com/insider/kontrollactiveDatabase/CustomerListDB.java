@@ -1,5 +1,6 @@
 package com.insider.kontrollactiveDatabase;
 
+import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Globals;
 
 import android.content.ContentValues;
@@ -28,10 +29,11 @@ public class CustomerListDB extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS customers");
 		onCreate(db);
 	}
-	public boolean insert(String name, String email, String department){
+	public boolean insert(int id, String name, String email, String department){
 		SQLiteDatabase db = this.getWritableDatabase();
 	    ContentValues contentValues = new ContentValues();
-
+	    
+	    contentValues.put("id", id);
 	    contentValues.put("name", name);
 		contentValues.put("email", email);	
 		contentValues.put("department", department);
@@ -44,10 +46,11 @@ public class CustomerListDB extends SQLiteOpenHelper {
 	      SQLiteDatabase db = this.getReadableDatabase();
 	      Cursor rs =  db.rawQuery( "select * from customers", null );
 	      while(rs.moveToNext()){
+	    	  int id = rs.getInt(rs.getColumnIndex("name"));
 	    	  String name = rs.getString(rs.getColumnIndex("name"));
 	    	  String email = rs.getString(rs.getColumnIndex("email"));
 	    	  String dept = rs.getString(rs.getColumnIndex("department"));
-	          Globals.custList.insert(name, email, dept);
+	          Globals.custList.add(new Customer(id, name, email, dept));
 	      }
 	}
 	public void clear(){

@@ -24,18 +24,23 @@ public class LoginActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("!!!", "hei");
+		
 		SharedPreferences userData = getSharedPreferences("UserFile", 0);
+		int idData = userData.getInt("id", 0);
 		String phoneData = userData.getString("phonenr", "null");
 		String pwData = userData.getString("password", "null");
 		String deptData = userData.getString("dept", "null");
 		boolean adminData = userData.getBoolean("admin", false);
-		if(!phoneData.equals("null") && !pwData.equals("null") && !deptData.equals("null")){
-			Globals.user = new User(phoneData, pwData, deptData, adminData);
+		if(idData!=0 && !phoneData.equals("null") && !pwData.equals("null") && !deptData.equals("null")){
+			Globals.user = new User(idData, phoneData, pwData, deptData, adminData);
 			nextActivity();
 		}
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.in_logo);
 		
 		/*String depts[] = {"Trondheim", "Oslo", "Bergen"};
 		dept = (Spinner) findViewById(R.id.dept);
@@ -54,6 +59,7 @@ public class LoginActivity extends ActionBarActivity {
 			Globals.userFound=false;
 			SharedPreferences userData = getSharedPreferences("UserFile", 0);
 			SharedPreferences.Editor editor = userData.edit();
+			editor.putInt("id", Globals.user.getId());
 			editor.putString("phonenr", Globals.user.getPhonenr());
 			editor.putString("password", Globals.user.getPassword());
 			editor.putString("dept", Globals.user.getDepartment());
@@ -98,10 +104,6 @@ public class LoginActivity extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
 		return super.onOptionsItemSelected(item);
 	}
     @Override

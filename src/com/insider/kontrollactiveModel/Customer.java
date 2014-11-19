@@ -4,9 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Customer implements Parcelable{
+	private int id;
 	private String name, email, department;
 	
-	public Customer(String name, String email, String department){
+	public Customer(int id, String name, String email, String department){
+		this.id=id;
 		this.name=name;
 		this.email=email;
 		this.department=department;
