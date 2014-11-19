@@ -73,7 +73,7 @@ public class Email {
         	body.setContentType("application/json");
 //        	StringBody body = new StringBody(json, ContentType.APPLICATION_JSON);
 
-            HttpPost post = new HttpPost("http://78.91.9.62:8080/insider/email/");
+            HttpPost post = new HttpPost("http://192.168.221.44:8080/insider/email/");
 
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
@@ -96,7 +96,7 @@ public class Email {
         		String json = "{"+recipient[0]+","+subject+","+body+"}";
         		StringEntity body = new StringEntity(json);
         		body.setContentType("application/json");
-        		HttpPost post = new HttpPost("http://78.91.9.62:8080/insider/email/");
+        		HttpPost post = new HttpPost("http://192.168.221.44:8080/insider/email/");
 
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
         		
