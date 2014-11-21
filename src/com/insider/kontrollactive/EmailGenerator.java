@@ -36,7 +36,7 @@ public class EmailGenerator {
     	EmailPrep prepper = new EmailPrep(emailList, cust, date, context, msg, attachement,type);
     	
     	prepper.createLocalEmail();
-    	Log.d("!!sjekker", attachement);
+//    	Log.d("!!sjekker", attachement);
     	
 //    	prepper.printNumberOfFiles();
     	
