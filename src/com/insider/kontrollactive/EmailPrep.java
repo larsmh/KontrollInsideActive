@@ -125,16 +125,16 @@ public class EmailPrep {
             	
             	email.setAttachementFilePath(attachement);
             	email.setSubject("Kvalitetsrapport fra Insider"); 
-            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utført "+lines[1]);
+            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utfÃ¸rt "+lines[1]);
             }
             
             if(type == 1){
             	email.setAttachement(hasAttachement);
             	email.setSubject("Vask ikke mulig på grunn av avvik");
             	email.setBody("Kjære kunde,\n"
+
             				+lines[2]+"\n"+
-            			"Denne mailen ble sent: "+lines[1]+"\n"+
-            			"Dette er mail number: "+f.getName()); 		
+            			"Denne mailen ble sent: "+lines[1]); 		
 				
             }
             
@@ -142,8 +142,7 @@ public class EmailPrep {
             	email.setAttachement(hasAttachement);
             	email.setSubject("Kvittering for utført vask"); 
             	email.setBody("Vask utført av Kjekken Kjakansen\n"+
-            			"Denne mailen ble sent: "+lines[1]+"\n"+
-            			"Dette er mail number: "+f.getName());
+            			"Denne mailen ble sent: "+lines[1]);
             }
 					
 			list.add(email);

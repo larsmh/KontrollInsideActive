@@ -50,8 +50,8 @@ public class RetrieveUser extends AsyncTask<String, Integer, Long> {
             if(json==null)
             	return null;
             JSONTokener tokener = new JSONTokener(json);
-            JSONObject jo = new JSONObject(tokener);
-            Globals.user = new User(jo.getString("Phonenr"), jo.getString("Password"), jo.getString("Department"), jo.getBoolean("Admin"));
+            JSONObject jObject = new JSONObject(tokener);
+            Globals.user = new User(jObject.getInt("Id"), jObject.getString("Phonenr"), jObject.getString("Password"), jObject.getString("Department"), jObject.getBoolean("Admin"));
             Globals.userFound=true;
         } catch (Exception e) {
             Log.d("!!!", e.getLocalizedMessage());

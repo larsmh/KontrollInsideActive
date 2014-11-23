@@ -41,7 +41,7 @@ public class QualityDialog extends DialogFragment{
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.StandardQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						
 						startActivity(intent);
 						break;
@@ -49,42 +49,42 @@ public class QualityDialog extends DialogFragment{
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.OppstartQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						startActivity(intent);
 						break;
 					case 2:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.BarnehageQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						startActivity(intent);
 						break;
 					case 3:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.ButikkQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						startActivity(intent);
 						break;
 					case 4:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.EiendomsdriftQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						startActivity(intent);
 						break;
 					case 5:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.HelsebyggQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						startActivity(intent);
 						break;
 					case 6:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.NaeringsbyggQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
-						intent.putExtra("userObject", user);
+						
 						startActivity(intent);
 						break;
 					default:

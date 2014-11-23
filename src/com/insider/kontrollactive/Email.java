@@ -71,8 +71,7 @@ public class Email {
         	StringEntity body = new StringEntity(json);
         	body.setContentType("application/json");
 
-
-            HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
+        	HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
             post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
@@ -91,8 +90,10 @@ public class Email {
         		String json = "{"+recipient[0]+","+subject+","+body+"}";
         		StringEntity body = new StringEntity(json);
         		body.setContentType("application/json");
+
         		HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
         		post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
+
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
         		
         		post.setEntity(builder.build());
