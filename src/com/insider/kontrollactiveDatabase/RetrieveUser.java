@@ -39,9 +39,12 @@ public class RetrieveUser extends AsyncTask<String, Integer, Long> {
  
             // create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
- 
+            HttpGet httpGet=new HttpGet(url);
+            httpGet.setHeader("Authorization", "Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
+            
             // make GET request to the given URL
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            HttpResponse httpResponse = httpclient.execute(httpGet);
+            //HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
  
             // receive response as inputStream
             BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));
@@ -51,7 +54,7 @@ public class RetrieveUser extends AsyncTask<String, Integer, Long> {
             	return null;
             JSONTokener tokener = new JSONTokener(json);
             JSONObject jObject = new JSONObject(tokener);
-            Globals.user = new User(jObject.getInt("Id"), jObject.getString("Phonenr"), jObject.getString("Password"), jObject.getString("Department"), jObject.getBoolean("Admin"));
+            Globals.user = new User(jObject.getInt("Id"), jObject.getString("Phonenr"), jObject.getString("Password"), jObject.getString("Department"), jObject.getBoolean("Admin"), jObject.getString("Name"));
             Globals.userFound=true;
         } catch (Exception e) {
             Log.d("!!!", e.getLocalizedMessage());

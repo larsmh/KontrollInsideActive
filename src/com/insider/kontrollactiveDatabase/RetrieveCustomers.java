@@ -35,9 +35,11 @@ public class RetrieveCustomers extends AsyncTask<String, Integer, Long> {
  
             // create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
- 
+            HttpGet httpGet=new HttpGet(url);
+            httpGet.setHeader("Authorization", "Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
             // make GET request to the given URL
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            HttpResponse httpResponse = httpclient.execute(httpGet);
+            //HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
  
             // receive response as inputStream
             BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));

@@ -6,7 +6,7 @@ import com.insider.kontrollactiveModel.Globals;
 
 
 public class DbAction {
-	String url ="http://78.91.8.239:8080/insider/";
+	String url ="https://kontroll.insider.no/insider/";
 	String user = "franang_admin";
 	String pw = "tranduil123";
 	String query;

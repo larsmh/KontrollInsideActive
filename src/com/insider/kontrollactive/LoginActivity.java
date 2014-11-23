@@ -32,8 +32,9 @@ public class LoginActivity extends ActionBarActivity {
 		String pwData = userData.getString("password", "null");
 		String deptData = userData.getString("dept", "null");
 		boolean adminData = userData.getBoolean("admin", false);
+		String nameData = userData.getString("name", "null");
 		if(idData!=0 && !phoneData.equals("null") && !pwData.equals("null") && !deptData.equals("null")){
-			Globals.user = new User(idData, phoneData, pwData, deptData, adminData);
+			Globals.user = new User(idData, phoneData, pwData, deptData, adminData, nameData);
 			nextActivity();
 		}
 
@@ -64,6 +65,7 @@ public class LoginActivity extends ActionBarActivity {
 			editor.putString("password", Globals.user.getPassword());
 			editor.putString("dept", Globals.user.getDepartment());
 			editor.putBoolean("admin", Globals.user.getAdmin());
+			editor.putString("name", Globals.user.getName());
 			editor.commit();
 			nextActivity();
 		}
