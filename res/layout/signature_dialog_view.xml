@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFCCCCCC"
+    android:orientation="vertical"
+     >
+
+    <com.insider.kontrollactiveReports.SignatureView
+    android:id="@+id/drawing"
+    android:layout_width="fill_parent"
+    android:layout_height="200dp"
+    android:background="#FFFFFFFF" />  
+   
+   <LinearLayout
+   		android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:orientation="horizontal"
+        android:weightSum="2">
+       
+       
+       <Button
+	       android:id="@+id/signature_dialog_okButton"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:background="?android:attr/selectableItemBackground"
+	       android:text="@string/ok" 
+	       android:paddingLeft="10dp"
+	       android:paddingRight="10dp"/>
+      	
+        <Button
+	       android:id="@+id/signature_dialog_cancelButton"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:background="?android:attr/selectableItemBackground"
+	       android:text="@string/cancel" 
+	       android:paddingLeft="10dp"
+	       android:paddingRight="10dp"
+	       android:layout_alignParentRight="true"/>
+      
+    </LinearLayout>
+    
+</LinearLayout>

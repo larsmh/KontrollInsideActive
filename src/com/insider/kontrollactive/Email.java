@@ -63,7 +63,6 @@ public class Email {
 		
 		HttpResponse response;
         StringBody sb;
-        
         try {
         	if(hasAttachement){
         		Log.d("!!Jeg skal sende ting", "funker det?");
@@ -71,18 +70,13 @@ public class Email {
         	String json = "{"+recipient[0]+","+subject+","+body+"}";
         	StringEntity body = new StringEntity(json);
         	body.setContentType("application/json");
-//        	StringBody body = new StringBody(json, ContentType.APPLICATION_JSON);
 
-            HttpPost post = new HttpPost("http://78.91.9.62:8080/insider/email/");
 
+            HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
+            post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
-//           builder.addPart("employee", body);
-//            builder.addPart("employee", body);
-//            json.put("FirstName", "badeanda87@hotmail.com");
-//            json.put("LastName", "franangthomas@gmail.com");
-//            StringEntity se = new StringEntity( json.toString());
-//            se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
             
             post.setEntity(builder.build());
             response = client.execute(post);
@@ -90,14 +84,15 @@ public class Email {
             /*Checking response */
             if(response!=null){
                 InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                
             }
         	}
         	else{
         		String json = "{"+recipient[0]+","+subject+","+body+"}";
         		StringEntity body = new StringEntity(json);
         		body.setContentType("application/json");
-        		HttpPost post = new HttpPost("http://78.91.9.62:8080/insider/email/");
-
+        		HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
+        		post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
         		
         		post.setEntity(builder.build());

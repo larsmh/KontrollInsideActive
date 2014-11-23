@@ -130,7 +130,6 @@ public class EmailPrep {
             
             if(type == 1){
             	email.setAttachement(hasAttachement);
-            	Log.d("!!checkckck", "lol "+msg+" "+lines[0]+" "+lines[1]+" "+lines[2]);
             	email.setSubject("Vask ikke mulig på grunn av avvik");
             	email.setBody("Kjære kunde,\n"
             				+lines[2]+"\n"+

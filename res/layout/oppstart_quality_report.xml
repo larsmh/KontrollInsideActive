@@ -1,38 +1,297 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.insider.kontrollkundeReports.StandardQualityReport">
+    tools:context="com.insider.kontrollkundeReports.StandardQualityReport" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        
 
-        <ScrollView
-            android:id="@+id/scrollView1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <LinearLayout
+            
+            <TextView
+                android:id="@+id/arbeidsplassmappe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/arbeidsplassmappe" />
+
+            <RadioGroup
+                android:id="@+id/radio_arbeidsplassmappe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:orientation="horizontal" >
 
-                <TextView
-                    android:id="@+id/textView1"
+                <RadioButton
+                    android:id="@+id/arbeidsplassmappe_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Oppstart" />
+                    android:checked="true"
+                    android:text="@string/yes" />
 
-            </LinearLayout>
-        </ScrollView>
-        
-    </LinearLayout>
+                <RadioButton
+                    android:id="@+id/arbeidsplassmappe_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/kontaktperson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kontaktperson_text" />
+            
+            <EditText
+                android:inputType="text"
+                android:id="@+id/kontaktperson_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/gulv_tepper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gulv_tepper" />
+
+            <Spinner
+                android:id="@+id/gulv_tepper_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/gulv_harde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gulv_hard" />
+
+            <Spinner
+                android:id="@+id/gulv_hard_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            
+           	 <TextView
+                android:id="@+id/kommentar_gulv_harde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kommentar_gulv" />
+
+           	 <EditText
+           	     android:id="@+id/kommentar_gulv_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:inputType="textMultiLine" />
+           	 
+           	 <TextView
+                android:id="@+id/sekundare_flater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sekundare_flater" />
+           	 <Spinner
+                android:id="@+id/sekundare_flater_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 <TextView
+                android:id="@+id/kommentar_sekundare_flater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kommentar_sekundare_flater" />
+
+           	 <EditText
+           	     android:id="@+id/kommentar_sekundare_flater_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:inputType="textMultiLine" />
+           
+           	<TextView
+                android:id="@+id/hygiene_sanitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hygiene_sanitar" />
+           	 <Spinner
+                android:id="@+id/hygiene_sanitar_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 
+           	 <TextView
+                android:id="@+id/kommentar_hygiene_sanitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kommentar_hygiene_sanitar" />
+
+           	 <EditText
+           	     android:id="@+id/hygiene_sanitar_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:inputType="textMultiLine" />
+            
+           	 <TextView
+                android:id="@+id/miljo_insider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/miljo_insider" />
+           	 <Spinner
+                android:id="@+id/miljo_insider_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 
+           	 <TextView
+                android:id="@+id/kommentar_miljo_insider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kommentar_miljo_insider" />
+
+           	 <EditText
+           	     android:id="@+id/miljo_insider_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:inputType="textMultiLine" />
+           	  
+           	  <TextView
+                android:id="@+id/lunsj_inside"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lunsj_inside" />
+           	 <Spinner
+                android:id="@+id/lunsj_inside_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 <TextView
+                android:id="@+id/kommentar_lunsj_inside"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kommentar_lunsj_inside" />
+
+           	 <EditText
+           	     android:id="@+id/lunsj_inside_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:inputType="textMultiLine" />
+           	 
+           	 <TextView
+                android:id="@+id/forskjell_etter_insider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forskjell_etter_insider" />
+           	 <Spinner
+                android:id="@+id/forskjell_etter_insider_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 <TextView
+                android:id="@+id/fornoyd_med_insider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fornoyd_med_insider" />
+           	 <Spinner
+                android:id="@+id/fornoyd_med_insider_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 
+           	 <TextView
+                android:id="@+id/medarbeidere_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medarbeidere_question" />
+           	 <Spinner
+                android:id="@+id/medarbeidere_question_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+           	 
+           	 <TextView
+                android:id="@+id/generell_kommentar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generell_kommentar" />
+
+           	 <EditText
+           	     android:id="@+id/generell_kommentar_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:inputType="textMultiLine" />
 
 
-</RelativeLayout>
+           	 <TextView
+                android:id="@+id/anbefalt_tillegg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/anbefalt_tillegg" />
+           	 
+           	 <CheckBox
+                android:id="@+id/vinduspuss_felt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vinduspuss_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android:id="@+id/oppskuring_felt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/oppskuring_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android:id="@+id/boning_felt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/boning_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android:id="@+id/hovedrenhold_felt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hovedrenhold_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android:id="@+id/trappevask_felt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trappevask_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 <CheckBox
+                android:id="@+id/okt_frekvens_felt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/okt_frekvens_felt" 
+                android:onClick="onCheckboxClicked"/>
+           	 
+           	 <RelativeLayout
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content" >
+
+           	    <Button
+           	         android:id="@+id/sign_button"
+           	         android:layout_width="wrap_content"
+           	         android:layout_height="wrap_content"
+           	         android:text="@string/signature"
+           	         android:drawableLeft="@drawable/sign_46" 
+           	         
+           	         />
+
+           	     <Button
+           	         android:id="@+id/generatePDF_button"
+           	         android:layout_width="wrap_content"
+           	         android:layout_height="wrap_content"
+           	         android:text="@string/generatePDF"
+           	         android:drawableLeft="@drawable/send"
+           	         android:layout_alignParentRight="true"/>
+
+           	 </RelativeLayout>
+           	 
+        </LinearLayout>
+    
+</ScrollView>
