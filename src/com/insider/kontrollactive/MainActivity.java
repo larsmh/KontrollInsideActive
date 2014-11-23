@@ -1,6 +1,12 @@
 package com.insider.kontrollactive;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import com.insider.kontrollactiveDatabase.CustomerListDB;
 import com.insider.kontrollactiveDatabase.DbAction;
@@ -9,17 +15,19 @@ import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
+
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -36,6 +44,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.insider.kontrollactiveDatabase.CustomerListDB;
+import com.insider.kontrollactiveDatabase.DbAction;
+import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveModel.Date;
+import com.insider.kontrollactiveModel.Globals;
+import com.sun.mail.imap.Utility;
 
 public class MainActivity extends ActionBarActivity {
 	private AutoCompleteTextView custSelect;
@@ -52,6 +66,8 @@ public class MainActivity extends ActionBarActivity {
 	
     protected void onCreate(Bundle savedInstanceState) {
         
+    	onStartUp();
+    	
 		Globals.custDB = new CustomerListDB(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -60,6 +76,7 @@ public class MainActivity extends ActionBarActivity {
         attachement ="";
         emailList = Globals.emaiList;
         custSelect = (AutoCompleteTextView) findViewById(R.id.custselect);
+        
         
         IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT);
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
@@ -135,7 +152,7 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde pï¿½ nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
@@ -266,40 +283,72 @@ public class MainActivity extends ActionBarActivity {
 		startActivity(intent);
     }
     
-//    private BroadcastReceiver receiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) { 
-//        	
-//        	 EmailPrep prepper = new EmailPrep(emailList, cust, date, context, msg,attachement);
-//        	 ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-//             if (connec != null && 
-//                 (connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) || 
-//                 (connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED)){ 
-//             	
-//            	 	try {
-//						prepper.setEmailListContent();
-//					} catch (Exception e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//             	
-//            	 	new SendEmailTask(emailList).execute();
-//                
-//            	if(emailList.size() > 0)
-//            		Toast.makeText(getApplicationContext(), "Email sendt!", Toast.LENGTH_SHORT).show();
-//            	
-//             	
-//             }
-//        	
-//        	
-//        }
-//      }; 
+    public void onStartUp(){
+    	AssetManager assetManager = getResources().getAssets();
+    	
+    	InputStream in = null;
+    	OutputStream out = null;
+    	
+    	File dir = new File(Environment.getExternalStorageDirectory()
+                + "/insider_data/templates");
+    	
+    	if(!dir.exists()){
+    		dir.mkdir();
+    		
+    		String[] files = {"rapport_barnehage.pdf", "rapport_butikk.pdf", "rapport_eiendomsdrift.pdf","rapport_helsebygg.pdf", "rapport_naeringsbygg.pdf", "rapport_oppstart.pdf"
+    				,"rapport_standard.pdf"};
+    		
+    		for (int i = 0; i < files.length; i++) {
+				
+    			try 
+    		    {
+    		        in = assetManager.open(files[i]);
+    		        String newFileName = Environment.getExternalStorageDirectory()
+    		                + "/insider_data/templates/"+files[i];
+    		        out = new FileOutputStream(newFileName);
+
+    		        byte[] buffer = new byte[1024];
+    		        int read;
+    		        while ((read = in.read(buffer)) != -1) 
+    		        {
+    		            out.write(buffer, 0, read);
+    		        }
+    		        in.close();
+    		        in = null;
+    		        out.flush();
+    		        out.close();
+    		        out = null;
+    		    } catch (Exception e) {
+    		    }finally{
+    		        if(in!=null){
+    		            try {
+    		                in.close();
+    		            } catch (IOException e) {
+    		                Log.d("!!oops", "Exception while closing input stream",e);
+    		            }
+    		        }
+    		        if(out!=null){
+    		            try {
+    		                out.close();
+    		            } catch (IOException e) {
+    		                Log.d("!!oops", "Exception while closing output stream",e);
+    		            }
+    		        }
+    		    }
+			}
+    	}
+    }
     
     public void quality(View v){
     	cust = getCustomer(custSelect.getText().toString());
-    	
-    	QualityDialog qualityDialog = new QualityDialog(cust,emailList);
-		qualityDialog.show(getSupportFragmentManager(), "Quality Report");
+    	if(cust==null){
+    		Toast.makeText(getApplicationContext(), 
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
+         			Toast.LENGTH_LONG).show();
+    		return;
+    	}
+    	QualityDialog qualityDialog = new QualityDialog(cust, Globals.user,emailList);
+    	qualityDialog.show(getSupportFragmentManager(), "Quality Report");
 
     }
 }

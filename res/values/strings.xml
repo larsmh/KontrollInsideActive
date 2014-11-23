@@ -11,7 +11,7 @@
     <string name="sendMsg">Send avviksmelding</string>
     <string name="abort">Avbryt</string>
     <string name="message">Melding</string>
-	<string name ="arbeidsplassmappe">Arbeidsplassmappe</string>
+	<string name ="arbeidsplassmappe">Arbeidsplassmappe:</string>
     <color name="red">#F05149</color>
     <color name="grey">#9c9c9c</color>
     <color name="grey2">#DDDDDD</color>
@@ -21,13 +21,71 @@
    
     <string name="cancel">Avbryt</string>
     <string name="ok">Ok</string>
+	<string name="signature">Signatur</string>
     
+    <string name="hyller_field">Hyller:</string>
+    <string name="inventarrenhold_field">Inventarrenhold</string>
+    <string name="tillegg_field"><b><i>Tillegg</i></b></string>
+    <string name="annet_field"><b><i>Annet</i></b></string>
+    <string name="hygiene_field"><b><i>Hygiene / sanitær</i></b></string>
+    <string name="gulvrenhold_field"><b><i>Gulvrenhold</i></b></string>
+    <string name="lister_vegger_field"><b><i>Lister, vegger(nåhøyde):</i></b></string>
+    <string name="dorer_vegger_field"><b><i>Dører, vegger (nåhøyde):</i></b></string>
+    <string name="kjokken_field"><b><i>Kjøkken</i></b></string>
+	<string name="dorer_handtak_field"><b><i>Dører, håndtak</i></b></string>
+    <string name="sekundare_flater_field"><b><i>Sekundære flater</i></b></string>
+  	<string name="hygiene_over_field"><b><i>Hygiene</i></b></string>
+    <string name="kritiske_punkter_field"><b><i>Kritiske punkter</i></b></string>
+  	<string name="inngangsparti_bold_field"><b><i>Inngangsparti</i></b></string>
+    
+  	<string name="gulv_repos_field">Gulv, repos:</string>
+  	<string name="kritiske_punkter">Kritiske punkter</string>
+    <string name="forbedringer">Forbedringer?</string>
+    <string name="fornoyd_field">Er du fornøyd med servicen vår?</string>
+    <string name="bemerkninger_field">Bemerkninger:</string>
+    <string name="temp_field">Behov for temp?</string>
+    <string name="speil_field">Speil:</string>
+    <string name="speil_vegg_field">Speil og veggrundt:</string>
+    <string name="soppelkasser_field">Søppelkasser:</string>
+    <string name="under_faste_matter_field">Under faste matter i inngang:</string>
+    <string name="dorflater_field">Dørflater, håndtak, dispensere:</string>
+    <string name="stelle_field">Stelleområder:</string>
+    <string name="handvask_field">Håndvask(desinfisering):</string>
+    <string name="handvask_enkel_field">Håndvask:</string>
+    <string name="handvask_vegg_field">Håndvask og vegg rundt:</string>
+    <string name="wc_pissoar_field">WC og pissoar og vegg rundt:</string>
+    <string name="dorflater_handtak_dispensere_field">Dørflater, håndtak, dispensere:</string>
+    <string name="vegg_v_toalett_handtorker_field">Vegg v/toalett + håndtørker:</string>
+	<string name="wc_field">WC:</string>
+	<string name="wc_dispensere_field">WC, dispensere:</string>
+    <string name="kjokkenskap_field">Kjøkkenskap(innvendig):</string>
+    <string name="glass_skillevegg_inngangsparti_field">Glass skillevegg eller inngangspartier:</string>
+    <string name="gulv_field">Gulv:</string>
+    <string name="spiseplass_field">Spiseplass:</string>
+    <string name="lysbrytere_field">Lysbrytere:</string>
+    <string name="lysbrytere_soyler_field">Lysbrytere, søyler:</string>
+    <string name="vegger_field">Vegger:</string>
+    <string name="gulvlister_field">Gulvlister:</string>
+    <string name ="inngangsparti_field">Inngangsparti - påkledning:</string>
+    <string name ="oppholdsrom_field">Oppholdsrom:</string>
+    <string name="kundemappe">Kundemappe:</string>
+    <string name="camera_icon">Ta bilde</string>
+    <string name="signature_icon">Signèr PDF</string>
+    <string name="signature_dialog_title">Signèr i det hvite feltet</string>
     <string name="quality_report_dialog">Velg kvalitetsrapport</string>
     <string name="kontaktperson_text">Kontaktperson hos kunde:</string>
+    <string name="sapedispensere_field">Såpedispensere:</string>
+     <string name="tepper">Tepper:</string>
+      <string name="harde">Harde:</string>
     <string name="gulv_tepper">Gulv - tepper:</string>
     <string name="gulv_hard">Gulv - harde:</string>
     <string name="kommentar_gulv">Kommentar gulv:</string>
+    <string name="handvask_desinfisering_field">Håndvask, desinfisering:</string>
+    <string name="panteomrade_field">Panteområde - pantelager:</string>
+    <string name="kjole_field">Kjølelager - lager:</string>
+    <string name="kasseomrade_field">Kasseområde:</string>
     <string name="sekundare_flater">Sekundære flater - bord,hyller, etc:</string>
+    <string name="kommentar_sekundare_flater">Kommentar sekundære flater:</string>
     <string name="hygiene_sanitar">Hygiene / sanitær etc:</string>
     <string name="kommentar_hygiene_sanitar">Kommentar hygiene / sanitær:</string>
     <string name="miljo_insider">MILJØ Insider</string>
@@ -47,6 +105,25 @@
     <string name="oppskuring_felt">Oppskuring</string>
     <string name="vinduspuss_felt">Vinduspuss</string>
     <string name="anbefalt_tillegg">Anbefalt tillegg:</string>
+    <string name="andre_stovflater_field">Andre støvflater:</string>
+    <string name="rulletrapp_field">Rulletrapp:</string>
+    <string name="bjerlker_atrium_field">Bjerlker atrium:</string>
+    <string name="glass_inngangsparti_field">Glass i inngangsparti:</string>
+    <string name="gelender_trapper_field">Gelender og trapper:</string>
+    <string name="trapper_field">Trapper:</string>
+    <string name="gelender_field">Gelender:</string>
+    <string name="annet_normal_field">Annet:</string>
+    <string name="heisgulv_field">Heisgulv, heisspor:</string>
+    <string name="heishus_field">Heishus, fronter:</string>
+    <string name="glass_inngangsdor_field">Glass inngangsdør:</string>
+    <string name="flekkfjerning_field">Flekkfjerning på vegg, lister, radiator, etc(nåhøyde):</string>
+    <string name ="postkasser_field">Postkasser:</string>
+    <string name="gelender_rekkverk_field">Gelender, rekkverk:</string>
+    <string name="toalett_field">Toalettrenhold:</string>
+    <string name="matter_temp_field">Behov for matter eller temp?</string>
+    <string name="diverse_field">Diverse / kommentar:</string>
+    <string name="behov_field">Behov for matter eller temp?</string>
+    
     <string-array name="quality_report_types">
         <item>Standard</item>
         <item>Oppstartsrapport</item>
@@ -58,6 +135,12 @@
         
     </string-array>
 
+    <string-array name = "butikk_barnehage_naringsbygg_spinner_choices">
+        <item>Ikke relevant</item>
+        <item>Godkjent</item>
+        <item>Ikke godkjent</item>
+    </string-array>
+    
     <string-array name = "normal_spinner_choices">
         <item>Ingen valg</item>
         <item>Ikke relevant</item>

@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
      xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,33 +6,551 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.insider.kontrollkundeReports.StandardQualityReport">
+    tools:context="com.insider.kontrollkundeReports.HelsebyggQualityReport">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <ScrollView
-            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
+          <TextView
+                android:id="@+id/kontaktperson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kontaktperson_text" />
+            
+            <EditText
+                android:inputType="text"
+                android:id="@+id/kontaktperson_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:ems="10" 
+                android:background="@color/white"                
+            	/>
+         
+        <TextView
+                android:id="@+id/arbeidsplassmappe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/arbeidsplassmappe" />
 
-                <TextView
-                    android:id="@+id/textView1"
+            <RadioGroup
+                android:id="@+id/radio_arbeidsplassmappe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/arbeidsplassmappe_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Standard" />
+                    android:checked="true"
+                    android:text="@string/yes" />
 
-            </LinearLayout>
-        </ScrollView>
+                <RadioButton
+                    android:id="@+id/arbeidsplassmappe_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/kundemappe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kundemappe" />
+
+            <RadioGroup
+                android:id="@+id/radio_kundemappe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/kundemappe_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/yes" />
+
+                <RadioButton
+                    android:id="@+id/kundemappe_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no" />
+            </RadioGroup>
+            
+            <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/gulvrenhold_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/gulvrenhold_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator3"
+                android:visibility="visible"
+                android:background="@color/red"/>
+            
+             
+             <TextView
+                android:id="@+id/tepper_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tepper" />
+            <Spinner
+                android:id="@+id/tepper_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/tepper_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+            <TextView
+                android:id="@+id/harde_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/harde" />
+            <Spinner
+                android:id="@+id/harde_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/harde_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+             
+             <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/dorer_handtak_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/dorer_handtak_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator0"
+                android:visibility="visible"
+                android:background="@color/red"/>
+             
+             <TextView
+                android:id="@+id/gulvlister_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gulvlister_field" />
+            <Spinner
+                android:id="@+id/gulvlister_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/gulvlister_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+            <TextView
+                android:id="@+id/dorer_vegger_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dorer_vegger_field" />
+            <Spinner
+                android:id="@+id/dorer_vegger_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/dorer_vegger_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+            
+            <TextView
+                android:id="@+id/lysbrytere_soyler_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lysbrytere_soyler_field" />
+            <Spinner
+                android:id="@+id/lysbrytere_soyler_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/lysbrytere_soyler_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+             
+             <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/sekundare_flater_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/sekundare_flater_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator1"
+                android:visibility="visible"
+                android:background="@color/red"/>
+             
+             <TextView
+                android:id="@+id/andre_stovflater_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/andre_stovflater_field" />
+            <Spinner
+                android:id="@+id/andre_stovflater_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/andre_stovflater_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+            <TextView
+                android:id="@+id/rulletrapp_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rulletrapp_field" />
+            <Spinner
+                android:id="@+id/rulletrapp_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/rulletrapp_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+            <TextView
+                android:id="@+id/bjerlker_atrium_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bjerlker_atrium_field" />
+            <Spinner
+                android:id="@+id/bjerlker_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/bjerlker_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+             <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/hygiene_sanitar_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/hygiene_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator2"
+                android:visibility="visible"
+                android:background="@color/red"/>
+             
+              <TextView
+                android:id="@+id/handvask_vegg_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/handvask_vegg_field" />
+            <Spinner
+                android:id="@+id/handvask_vegg_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/handvask_vegg_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+            <TextView
+                android:id="@+id/wc_pissoar_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wc_pissoar_field" />
+            <Spinner
+                android:id="@+id/wc_pissoar_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/wc_pissoar_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+             <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/hygiene_over_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/hygiene_over_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator4"
+                android:visibility="visible"
+                android:background="@color/red"/>
+             
+            
+            
+            <TextView
+                android:id="@+id/sapedispensere_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sapedispensere_field" />
+            <Spinner
+                android:id="@+id/sapedispensere_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/sapedispensere_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+             <TextView
+                android:id="@+id/speil_vegg_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/speil_vegg_field" />
+            <Spinner
+                android:id="@+id/speil_vegg_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/speil_vegg_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+             <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/annet_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/annet_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator5"
+                android:visibility="visible"
+                android:background="@color/red"/>
+             
+             <TextView
+                android:id="@+id/under_faste_matter_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/under_faste_matter_field" />
+            <Spinner
+                android:id="@+id/under_faste_matter_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/under_faste_matter_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+            <TextView
+                android:id="@+id/glass_inngangsparti_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/glass_inngangsparti_field" />
+            <Spinner
+                android:id="@+id/glass_inngangsparti_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/glass_inngangsparti_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+            
+            <TextView
+                android:id="@+id/gelender_trapper_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gelender_trapper_field" />
+            <Spinner
+                android:id="@+id/gelender_trapper_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+           	     android:id="@+id/gelender_trapper_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+             
+             <Space
+ 			 android:layout_width="1dp"
+  			android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/tillegg_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              	android:textColor="@color/red"
+                android:text="@string/tillegg_field"
+                />
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.2dp"
+                android:id="@+id/separator6"
+                android:visibility="visible"
+                android:background="@color/red"/>
+             
+             <TextView
+                android:id="@+id/temp_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/temp_field" />
+           <RadioGroup
+                android:id="@+id/radio_temp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/temp_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/yes" />
+
+                <RadioButton
+                    android:id="@+id/temp_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+           <EditText
+           	     android:id="@+id/temp_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+             
+           
+           <TextView
+                android:id="@+id/bemerkninger_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bemerkninger_field" />
+           <EditText
+           	     android:id="@+id/bemerkninger_text"
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content"
+           	     android:ems="10"
+           	     android:hint="@string/forbedringer"
+           	     android:background="@color/white"
+           	     android:inputType="textMultiLine" />
+           
+           
+              <RelativeLayout
+           	     android:layout_width="match_parent"
+           	     android:layout_height="wrap_content" >
+
+           	     <Button
+           	         android:id="@+id/sign_button"
+           	         android:layout_width="wrap_content"
+           	         android:layout_height="wrap_content"
+           	         android:text="@string/signature"
+           	         android:drawableLeft="@drawable/sign_46" 
+           	         
+           	         />
+
+           	     <Button
+           	         android:id="@+id/generatePDF_button"
+           	         android:layout_width="wrap_content"
+           	         android:layout_height="wrap_content"
+           	         android:text="@string/generatePDF"
+           	         android:drawableLeft="@drawable/send"
+           	         android:layout_alignParentRight="true"/>
+
+           	 </RelativeLayout>
         
     </LinearLayout>
 
 
-</RelativeLayout>
+</ScrollView>
+

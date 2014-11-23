@@ -1,18 +1,26 @@
 package com.insider.kontrollactiveReports;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -42,19 +50,22 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
-public class StandardQualityReport extends ActionBarActivity {
+public class StandardQualityReport extends ActionBarActivity implements ReportInterface {
 
+	SignatureView drawView;
 	static final int REQUEST_TAKE_PHOTO = 1;
 	ArrayList<File> pictureList;
 	ArrayList<Email> emailList;
 	ArrayList<String> stringList;
+	ArrayList<String> pictureDokumentationList;
 	String[] checkBoxChoices;
-	String picturePath, attachementPath;
+	String picturePath, attachementPath, pictureDokuString ="";
+	String signFilePath;
 	String date;
 	Customer cust;
 	User user;
 	String msg;
-
+	Context context = this;
 	boolean vinduspuss_check, oppskuring_check, boning_check, hovedrenhold_check, trappevask_check, okt_frekvens_check;
 	
 	RadioGroup radio_arbeidsplassmappe;
@@ -66,7 +77,7 @@ public class StandardQualityReport extends ActionBarActivity {
 	
 	Spinner gulv_tepper_spinner, gulv_harde_spinner, sekundare_flater_spinner, hygiene_sanitar_spinner, miljo_inside_spinner,lunsj_inside_spinner, forskjell_etter_inside_spinner,
 	fornoyd_med_inside_spinner, medarbeidere_question_spinner;
-	Button camera_button, pdf_button;
+	Button signature_button, pdf_button;
 	
 	RadioButton arbeidsplassmappe_ja, arbeidsplassmappe_nei;
 	CheckBox vinduspuss, oppskuring, boning, hovedrenhold, trappevask, okt_frekvens;
@@ -74,13 +85,14 @@ public class StandardQualityReport extends ActionBarActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.standard_quality_report);
+	
 		this.setTitle("Standard Kvalitetsrapport");
 		msg = "";
 		date = new Date().getDate();
 		pictureList = new ArrayList<File>();
 		emailList = Globals.emaiList;
 		stringList = new ArrayList<String>();
-		
+		signFilePath ="";
 		Intent intent = getIntent();
 		Bundle b = intent.getExtras();
 		cust = b.getParcelable("customerObject");
@@ -91,15 +103,15 @@ public class StandardQualityReport extends ActionBarActivity {
 		identifyRadioGroup();
 		identifyRadioButtons();
 		identifyButtons();
-		
-		camera_button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				dispatchTakePictureIntent();
-			}
-		});
-		
+//		
+//		camera_button.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				signatureDialog();
+//			}
+//		});
+//		
 		pdf_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -123,6 +135,79 @@ public class StandardQualityReport extends ActionBarActivity {
 
 			
 		});
+		
+		signature_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				signatureDialog();
+				
+			}
+		});
+	}
+	
+	public boolean onCreateOptionsMenu(Menu menu){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.quality_report, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_camera:
+	        	dispatchTakePictureIntent();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	public void signatureDialog(){
+		
+		final Dialog signDialog = new Dialog(context);
+		signDialog.setTitle("Signèr i det hvite feltet");
+		signDialog.setContentView(R.layout.signature_dialog_view);
+		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
+		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);
+		Button cancelButton = (Button) signDialog.findViewById(R.id.signature_dialog_cancelButton);
+		
+		okButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				drawView.setDrawingCacheEnabled(true);
+				String signFileName = Environment.getExternalStorageDirectory()+"/insider_data/sign.png";
+				OutputStream stream;
+				try {
+					stream = new FileOutputStream(signFileName);
+					drawView.getDrawingCache().compress(CompressFormat.PNG, 80, stream);
+					Toast.makeText(context, "Signatur lagret i pdf!", Toast.LENGTH_SHORT).show();
+					signFilePath = signFileName;
+					Log.d("!!Sign",signFilePath);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+		    	drawView.destroyDrawingCache();
+		    	signDialog.dismiss();
+			}
+		});
+		
+		cancelButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				signDialog.dismiss();
+				
+			}
+		});
+	
+		signDialog.show();
 	}
 	
 	public void sendPDF() throws Exception{
@@ -134,11 +219,11 @@ public class StandardQualityReport extends ActionBarActivity {
 	}
 	
 	public void createPDF() throws IOException, DocumentException{
+		
 		int  arbeidsplassMappeSelected = radio_arbeidsplassmappe.getCheckedRadioButtonId();
 		String text = "";
-		Log.d("!!", cust.getName());
 		String src = Environment.getExternalStorageDirectory()
-                 + "/insider_data/rapport_standard.pdf";
+                 + "/insider_data/templates/rapport_standard.pdf";
          String dst = Environment.getExternalStorageDirectory()
                  + "/insider_data/standard_kvalitetsrapport_"+date+".pdf"; 
         
@@ -146,9 +231,9 @@ public class StandardQualityReport extends ActionBarActivity {
          PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dst));
          
          AcroFields form = stamper.getAcroFields();
-
+         
          form.setField("date_in_header_field", date);
-         form.setField("executor_field", "Thomas");
+         form.setField("executor_field", Globals.user.getName());
          form.setField("customer_field", cust.getName());
          form.setField("department_field", cust.getDepartment());
          form.setField("type_of_report_field", "Standard kvalitetsrapport");
@@ -305,17 +390,44 @@ public class StandardQualityReport extends ActionBarActivity {
         	 form.setField("økt_frekvens_box", "Yes");
          }
          
+        
          
          if(pictureList.size() != 0){
+        	 Log.d("!!Pic","asdasd");
         	 addPicturesToPDF(reader, stamper);
          }
-                 
+         
+         for (int i = 0; i < stringList.size(); i++) {
+ 			pictureDokuString += stringList.get(i)+" ";
+ 		}
+          form.setField("picures_field", pictureDokuString);
+         
+         if(signFilePath != ""){
+        	 addSignatureToPDF(reader, stamper);
+         }
+         
+        
+         form.setField("sign_field", cust.getDepartment()+", "+kontaktperson_text.getText().toString());
+         
          stamper.setFormFlattening(true);
          stamper.close();
          reader.close();
          attachementPath = dst;
         
 	}
+	
+	public void addSignatureToPDF(PdfReader reader,PdfStamper stamper) throws MalformedURLException, IOException, DocumentException{
+		
+		PdfContentByte overContent = stamper.getOverContent(1);
+		
+		Image image = Image.getInstance(signFilePath);
+		image.setAbsolutePosition(292,60);
+		image.scaleAbsolute(190,20);
+		overContent.addImage(image);
+		File sign = new File(signFilePath);
+		sign.delete();
+	}
+	
 	
 	public void addPicturesToPDF(PdfReader reader, PdfStamper stamper) throws MalformedURLException, IOException, DocumentException{
 		stamper.insertPage(reader.getNumberOfPages() + 1, reader.getPageSizeWithRotation(1));
@@ -324,6 +436,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		int xPos = 50;
 		int yPos = 610;
 		int count = 0;
+		
 		for (int i = 0; i < pictureList.size(); i++) {
 			 Image image1 = Image.getInstance(pictureList.get(i).getAbsolutePath());          
 		     
@@ -395,7 +508,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		
 	}
 	
-	private void dispatchTakePictureIntent() {
+	public void dispatchTakePictureIntent() {
 	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    // Ensure that there's a camera activity to handle the intent
 	    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -412,12 +525,16 @@ public class StandardQualityReport extends ActionBarActivity {
 	            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
 	                    Uri.fromFile(photoFile));
 	          startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+	          Log.d("!!Pic1", photoFile.getAbsolutePath());
+	        
+	          
+	          
 	          pictureList.add(photoFile);
 	          stringList.add("bilde."+pictureList.size());
-	          Log.d("!!pic",""+pictureList.size());
 	        }
 	    	}
 	    }
+	
 	
 	public File createImageFile() throws IOException {
 	    // Create an image file name
@@ -444,7 +561,7 @@ public class StandardQualityReport extends ActionBarActivity {
 		kontaktperson = (TextView)findViewById(R.id.kontaktperson);
 		gulv_tepper = (TextView)findViewById(R.id.gulv_tepper);
 		gulv_harde = (TextView)findViewById(R.id.gulv_harde);
-		kommentar_gulv = (TextView)findViewById(R.id.kommentar_gulv);
+		kommentar_gulv = (TextView)findViewById(R.id.kommentar_gulv_harde);
 		sekundare_flater = (TextView)findViewById(R.id.sekundare_flater);
 		kommentar_sekundare_flater = (TextView)findViewById(R.id.kommentar_sekundare_flater);
 		hygiene_sanitar = (TextView)findViewById(R.id.hygiene_sanitar); 
@@ -528,7 +645,7 @@ public class StandardQualityReport extends ActionBarActivity {
 	
 	public void identifyButtons(){
 		
-		camera_button = (Button) findViewById(R.id.take_picture_button);
+		signature_button = (Button) findViewById(R.id.sign_button);
 		pdf_button = (Button) findViewById(R.id.generatePDF_button);
 		
 	}

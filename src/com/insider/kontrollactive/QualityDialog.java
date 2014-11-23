@@ -3,6 +3,8 @@ package com.insider.kontrollactive;
 import java.util.ArrayList;
 
 import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveModel.Globals;
+import com.insider.kontrollactiveModel.User;
 import com.insider.kontrollactiveReports.StandardQualityReport;
 
 import android.app.AlertDialog;
@@ -17,8 +19,9 @@ import android.widget.Toast;
 public class QualityDialog extends DialogFragment{
 	Intent intent;
 	Customer cust;
+	User user;
 	ArrayList<Email> emailList;
-	public QualityDialog(Customer cust, ArrayList<Email> emailList) {
+	public QualityDialog(Customer cust, User user, ArrayList<Email> emailList) {
 		this.emailList = emailList;
 		this.cust = cust;
 	}
@@ -38,42 +41,50 @@ public class QualityDialog extends DialogFragment{
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.StandardQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
+						
 						startActivity(intent);
 						break;
 					case 1:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.OppstartQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
 						startActivity(intent);
 						break;
 					case 2:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.BarnehageQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
 						startActivity(intent);
 						break;
 					case 3:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.ButikkQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
 						startActivity(intent);
 						break;
 					case 4:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.EiendomsdriftQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
 						startActivity(intent);
 						break;
 					case 5:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.HelsebyggQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
 						startActivity(intent);
 						break;
 					case 6:
 						intent = new Intent(getActivity(), com.insider.kontrollactiveReports.NaeringsbyggQualityReport.class);
 						intent.putExtra("choice", ""+which);
 						intent.putExtra("customerObject", cust);
+						
 						startActivity(intent);
 						break;
 					default:
