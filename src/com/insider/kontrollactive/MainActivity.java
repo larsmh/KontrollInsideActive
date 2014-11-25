@@ -152,15 +152,15 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde pï¿½ nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
     	String title="Registrering av oppdrag";
-    	String message="Er du sikker på at du vil registrere dette oppdraget?";
+    	String message="Er du sikker pï¿½ at du vil registrere dette oppdraget?";
     	if(msgText.isShown()){
     		title="Sending av avviksmelding";
-    		message="Er du sikker på at du vil sende avviksmeldingen?";
+    		message="Er du sikker pï¿½ at du vil sende avviksmeldingen?";
     		type = 1;
     	}	
     	new AlertDialog.Builder(this)
@@ -289,6 +289,12 @@ public class MainActivity extends ActionBarActivity {
     	InputStream in = null;
     	OutputStream out = null;
     	
+    	File rootDir = new File(Environment.getExternalStorageDirectory() + "/insider_data");
+    	
+    	if(!rootDir.exists()){
+    		rootDir.mkdir();
+    	}
+    	
     	File dir = new File(Environment.getExternalStorageDirectory()
                 + "/insider_data/templates");
     	
@@ -343,7 +349,7 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde pï¿½ nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
