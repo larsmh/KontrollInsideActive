@@ -213,7 +213,7 @@ public class OppstartQualityReport extends ActionBarActivity implements ReportIn
 	public void sendPDF() throws Exception{
 		int type = 3;
 		 
-		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type);
+		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type, Globals.user.getId());
 		gen.sendEmail();
 		finish();
 	}

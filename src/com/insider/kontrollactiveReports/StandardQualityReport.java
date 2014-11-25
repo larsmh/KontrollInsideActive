@@ -213,7 +213,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
 	public void sendPDF() throws Exception{
 		int type = 3;
 		 
-		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type);
+		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type, Globals.user.getId());
 		gen.sendEmail();
 		finish();
 	}
@@ -387,7 +387,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
          }
          
          if(okt_frekvens_check){
-        	 form.setField("�kt_frekvens_box", "Yes");
+        	 form.setField("økt_frekvens_box", "Yes");
          }
          
         

@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
 	private String date, msg;
 	int type = 0;
 	DbAction db;
-	
+	BroadcastReceiver receiver;
 	
     protected void onCreate(Bundle savedInstanceState) {
         
@@ -80,7 +81,8 @@ public class MainActivity extends ActionBarActivity {
         
         IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT);
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-//        this.registerReceiver(this.receiver, filter);  
+        
+        this.registerReceiver(this.receiver, filter);  
         
         final ActionBarActivity a = this;
         
@@ -152,15 +154,15 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde p� nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
     	String title="Registrering av oppdrag";
-    	String message="Er du sikker p� at du vil registrere dette oppdraget?";
+    	String message="Er du sikker på at du vil registrere dette oppdraget?";
     	if(msgText.isShown()){
     		title="Sending av avviksmelding";
-    		message="Er du sikker p� at du vil sende avviksmeldingen?";
+    		message="Er du sikker på at du vil sende avviksmeldingen?";
     		type = 1;
     	}	
     	new AlertDialog.Builder(this)
@@ -186,18 +188,15 @@ public class MainActivity extends ActionBarActivity {
     	    	
     	//Sending email
     	date = new Date().getDate();
-    	msg=msgText.getText().toString();
+    	msg="--1";
     	Log.d("!!msg", "Message: "+msg);
     	if(msgText.isShown()){
     		msg=msgText.getText().toString();
     		}
-    	else{
-	    	db = new DbAction();
-	    	db.registerJob(cust.getName(), date);
-    	}
+    	
     	Log.d("!!inne i finish","lol");
     	
-    	EmailGenerator gen = new EmailGenerator(this,cust,date,msg,emailList,attachement,type);
+    	EmailGenerator gen = new EmailGenerator(this,cust,date,msg,emailList,attachement,type, Globals.user.getId());
     	gen.sendEmail();
     	msgText.setText("");
     	setMsgInvisible();
@@ -243,7 +242,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_log_out) {
         	new AlertDialog.Builder(this)
         	.setTitle("Utlogging")
-            .setMessage("Er du sikker p� at du vil logge ut?")
+            .setMessage("Er du sikker på at du vil logge ut?")
             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             	public void onClick(DialogInterface dialog, int which) { 
             		logout();
@@ -349,7 +348,7 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde p� nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
@@ -358,3 +357,5 @@ public class MainActivity extends ActionBarActivity {
 
     }
 }
+
+

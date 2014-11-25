@@ -58,6 +58,7 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
 	ArrayList<String> pictureDokumentationList;
 	Customer cust;
 	User user;
+	int userID;
 	String date,picturePath,msg, attachementPath, pictureDokuString ="";
 	SignatureView drawView;
 	Context context;
@@ -194,7 +195,7 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
 	public void sendPDF() throws Exception {
 		int type = 3;
 		 
-		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type);
+		EmailGenerator gen = new EmailGenerator(this, cust, date, msg, emailList,attachementPath, type, Globals.user.getId());
 		gen.sendEmail();
 		finish();
 		
@@ -286,8 +287,8 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
          form.setField("kjokkenskap_utvendig_field", kjokkenskap_spinner.getSelectedItem().toString());
          form.setField("kjokkenskap_utvendig_beskrivelse", kjokkenskap_text.getText().toString());
          
-         form.setField("h�ndvask_desinfisering_field", handvask_spinner.getSelectedItem().toString());
-         form.setField("h�ndvask_desinfisering_beskrivelse_field", handvask_text.getText().toString());
+         form.setField("håndvask_desinfisering_field", handvask_spinner.getSelectedItem().toString());
+         form.setField("håndvask_desinfisering_beskrivelse_field", handvask_text.getText().toString());
          
          form.setField("wc_field", wc_spinner.getSelectedItem().toString());
          form.setField("wc_beskrivelse_field", wc_text.getText().toString());

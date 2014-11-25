@@ -10,7 +10,10 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveModel.Globals;
 
 public class EmailGenerator {
 
@@ -21,7 +24,9 @@ public class EmailGenerator {
 	Context context;
 	String attachement;
 	int type;
-	public EmailGenerator(Context context, Customer cust, String date, String msg, ArrayList<Email> emailList, String attachement, int type) {
+	int userID;
+	
+	public EmailGenerator(Context context, Customer cust, String date, String msg, ArrayList<Email> emailList, String attachement, int type, int userID) {
 		this.cust = cust;
 		this.date = date;
 		this.msg = msg;
@@ -29,11 +34,12 @@ public class EmailGenerator {
 		this.context = context;
 		this.attachement = attachement;
 		this.type = type;
+		this.userID = userID;
 		
 	}
 	
 	public void sendEmail() throws Exception{
-    	EmailPrep prepper = new EmailPrep(emailList, cust, date, context, msg, attachement,type);
+    	EmailPrep prepper = new EmailPrep(emailList, cust, date, context, msg, attachement,type, userID);
     	
     	prepper.createLocalEmail();
     	
@@ -52,11 +58,8 @@ public class EmailGenerator {
 				
         	SendEmailTask task = new SendEmailTask(emailList);
         	task.execute();
-            
         	Toast.makeText(context, "Email sendt!", Toast.LENGTH_SHORT).show();
-        	
-        	
-        	
+
         } else if (connec.getNetworkInfo(0).getState() == NetworkInfo.State.DISCONNECTED ||
                  connec.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED ) {            
                 //Not connected.

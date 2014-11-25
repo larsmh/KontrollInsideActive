@@ -6,7 +6,6 @@ import android.os.Parcelable;
 public class Customer implements Parcelable{
 	private int id;
 	private String name, email, department;
-	
 	public Customer(int id, String name, String email, String department){
 		this.id=id;
 		this.name=name;
@@ -31,8 +30,12 @@ public class Customer implements Parcelable{
 		return name;
 	}
 
+	public int getId(){
+		return id;
+	}
+	
 	  public Customer(Parcel in){
-          String[] data = new String[3];
+          String[] data = new String[4];
 
           in.readStringArray(data);
           this.name = data[0];
@@ -49,6 +52,8 @@ public class Customer implements Parcelable{
           dest.writeStringArray(new String[] {this.name,
                                               this.email,
                                               this.department});
+          int idData = id;
+          dest.writeInt(idData);
       }
       public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
           public Customer createFromParcel(Parcel in) {

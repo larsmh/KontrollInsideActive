@@ -13,6 +13,10 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.insider.kontrollactiveDatabase.DbAction;
+import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveModel.Globals;
+
 import android.os.Environment;
 import android.util.Log;
 
@@ -24,15 +28,18 @@ public class Email {
 	String json;
 	String date;
 	String path;
+	String department;
+	String type;
+	
 	File file; 
 	Boolean hasAttachement;
-	
+	int custID;
 	HttpClient client; 
 	MultipartEntityBuilder builder;
 	
 	public Email() {
 		
-		
+		this.custID = custID;
 		client = new DefaultHttpClient();
 		builder = MultipartEntityBuilder.create();
 		hasAttachement = false;
@@ -59,38 +66,47 @@ public class Email {
 	public void setDate(String date){
 		this.date = "\"Date\":\""+date+"\"";
 	}
+	
+	public void setDepartment(String deparment){
+		this.department = "\"Department\":\""+Globals.user.getDepartment().toLowerCase()+"\"";
+		
+	}
+	
+	public void setType(int type){
+		this.type = "\"Type\":\""+type+"\"";
+	}
+	
 	public void send(){
+		Log.d("!!asd", this.department);
+		DbAction dbAction = new DbAction();
 		
 		HttpResponse response;
         StringBody sb;
         try {
         	if(hasAttachement){
-        		Log.d("!!Jeg skal sende ting", "funker det?");
         	file = new File(path);
-        	String json = "{"+recipient[0]+","+subject+","+body+"}";
+        	String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
         	StringEntity body = new StringEntity(json);
         	body.setContentType("application/json");
-
+//        	HttpPost post = new HttpPost("http://192.168.221.48:8080/insider/email/");
         	HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
             post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
 
-            
+//            dbAction.registerJob(custID, date);
             post.setEntity(builder.build());
             response = client.execute(post);
             
-            /*Checking response */
-            if(response!=null){
-                InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                
-            }
+            
         	}
         	else{
-        		String json = "{"+recipient[0]+","+subject+","+body+"}";
+        		String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
         		StringEntity body = new StringEntity(json);
         		body.setContentType("application/json");
 
+//        		HttpPost post = new HttpPost("http://192.168.221.48:8080/insider/email/");
+        		
         		HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
         		post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
 
@@ -99,9 +115,7 @@ public class Email {
         		post.setEntity(builder.build());
                 response = client.execute(post);
                 
-                if(response!=null){
-                    InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                }
+                
         	}
 
             

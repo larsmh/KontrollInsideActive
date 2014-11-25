@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveModel.Globals;
 
 public class EmailPrep {
 
@@ -22,11 +25,12 @@ public class EmailPrep {
 	Customer cust;
 	Context context;
 	File myDir;
+	int custID;
 	String attachement;
 	boolean hasAttachement;
 	int type;
 	
-	public EmailPrep(ArrayList<Email> list, Customer cust, String date, Context context, String msg, String attachement, int type) {
+	public EmailPrep(ArrayList<Email> list, Customer cust, String date, Context context, String msg, String attachement, int type, int custID) {
 		this.list = list;
 		this.date = date;
 		this.cust = cust;
@@ -35,15 +39,14 @@ public class EmailPrep {
 		this.attachement = attachement;
 		this.type = type;
 		myDir = context.getDir("myDir", Context.MODE_PRIVATE);
-		Log.d("!!emailPrep", ""+attachement);
-		
+		this.custID = custID;
 	}
 	
 	public void createLocalEmail(){
 
 		String email = cust.getEmail();
     	String name = cust.getName();
-    	String[] s = {email, date, msg};
+    	String[] s = {email, date, msg, ""+cust.getId(), ""+Globals.user.getId()};
     	File file;    	
 		
 //    	Log.d("!!inne i CreateLocalEamil", "lol "+msg+" "+s[0]+" "+s[1]+" "+s[2]);
@@ -70,6 +73,10 @@ public class EmailPrep {
 				writer.newLine();
 				writer.write(s[2]);
 				writer.newLine();
+				writer.write(s[3]);
+				writer.newLine();
+				writer.write(s[4]);
+				writer.newLine();
 			
 			writer.flush();
 			writer.close();
@@ -81,7 +88,7 @@ public class EmailPrep {
 	}
 	
 	public void setEmailListContent() throws Exception{
-		String lines[] = {"","",""};
+		String lines[] = {"","","","",""};
 		String line;
 		
 		if( myDir.list().length != 0){
@@ -89,7 +96,7 @@ public class EmailPrep {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader(f.getAbsolutePath()));
 				try {
-					for (int j = 0; j < 3; j++) {
+					for (int j = 0; j < 5; j++) {
 						lines[j] = br.readLine();
 //						Log.d("!!", ""+lines[j]);
 					}
@@ -104,19 +111,21 @@ public class EmailPrep {
 				e.printStackTrace();
 			}
 			
-//			Log.d("!!checkckck", "lol "+msg+" "+lines[0]+" "+lines[1]+" "+lines[2]);
 			
 			File dir = new File(Environment.getExternalStorageDirectory(), "insider_data");
 			Email email = new Email();
-//			if(attachement == true){
-//				Log.d("!!emailPrep right before add", ""+attachement);
-//				email.addAttachment(file.getAbsolutePath());
-//			}
 				
 			Log.d("!!Inne i prepper", cust.getEmail());	
 			String[] toArr = {lines[0]}; 
             email.setTo(toArr); 
 //            email.setFrom("franangthomas@gmail.com"); 
+            
+            DbAction dbAction = new DbAction();
+            
+
+        	if(type == 0 || type == 3){
+        	Log.d("!!asd",lines[3]+" "+lines[4]+ " "+ lines[1]);
+        	dbAction.registerJob(lines[3], lines[4], lines[1]);}
             
             if(type == 3){
             	Log.d("!!attachment er", "lol "+attachement+"");
@@ -124,25 +133,38 @@ public class EmailPrep {
             	email.setAttachement(hasAttachement);
             	
             	email.setAttachementFilePath(attachement);
-            	email.setSubject("Kvalitetsrapport fra Insider"); 
-            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utfÃ¸rt "+lines[1]);
+            	email.setSubject("Kvalitetsrapport "+cust.getName()+ " "+ lines[1]); 
+            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utfÃ¸rt "+lines[1]+"\n"
+            			+ "\n"+
+            			"mvh\n"+
+            			"Insider Facility Services AS");
+            	email.setDepartment(cust.getDepartment());
+            	email.setType(type);
+            	
             }
             
             if(type == 1){
             	email.setAttachement(hasAttachement);
-            	email.setSubject("Vask ikke mulig på grunn av avvik");
-            	email.setBody("Kjære kunde,\n"
+            	email.setSubject("Renhold ikke mulig pÃ¥ grunn av avvik");
+            	email.setBody("KjÃ¦re kunde,\n"
 
             				+lines[2]+"\n"+
             			"Denne mailen ble sent: "+lines[1]); 		
-				
+            	email.setDepartment(cust.getDepartment());
+            	email.setType(type);
             }
+            
+            
             
             if(type == 0) {
             	email.setAttachement(hasAttachement);
-            	email.setSubject("Kvittering for utført vask"); 
-            	email.setBody("Vask utført av Kjekken Kjakansen\n"+
-            			"Denne mailen ble sent: "+lines[1]);
+            	email.setSubject("Kvittering for utfÃ¸rt renhold"); 
+            	email.setBody("Insider har nÃ¥ utfÃ¸rt dagens renhold.\n" +
+            			"\n"+
+            			"mvh\n"+
+            			"Insider Facility Services AS");
+            	email.setDepartment(cust.getDepartment());
+            	email.setType(type);
             }
 					
 			list.add(email);
