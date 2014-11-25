@@ -91,6 +91,7 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
 		cust = b.getParcelable("customerObject");
 		user = b.getParcelable("userObject");
 		
+		
 		identifyTextView();
 		identifyEditText();
 		identifySpinners();

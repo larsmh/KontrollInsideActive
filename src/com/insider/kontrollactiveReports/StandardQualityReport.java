@@ -363,7 +363,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
          form.setField("boning_field", "Boning");
          form.setField("hovedrenhold_field", "Hovedrenhold");
          form.setField("trappevask_field", "Trappevask");
-         form.setField("økt_frekvens_field", "økt frekvens");
+         form.setField("økt_frekvens_field", "Økt frekvens");
          
          
          if(vinduspuss_check){

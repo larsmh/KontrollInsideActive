@@ -35,12 +35,13 @@ public class Customer implements Parcelable{
 	}
 	
 	  public Customer(Parcel in){
-          String[] data = new String[4];
-
+          String[] data = new String[3];
           in.readStringArray(data);
           this.name = data[0];
           this.email = data[1];
           this.department = data[2];
+          id = in.readInt();
+          
       }
 
       public int describeContents(){
@@ -52,8 +53,8 @@ public class Customer implements Parcelable{
           dest.writeStringArray(new String[] {this.name,
                                               this.email,
                                               this.department});
-          int idData = id;
-          dest.writeInt(idData);
+          
+          dest.writeInt(id);
       }
       public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
           public Customer createFromParcel(Parcel in) {

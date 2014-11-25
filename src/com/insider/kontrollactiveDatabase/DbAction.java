@@ -6,8 +6,8 @@ import com.insider.kontrollactiveModel.Globals;
 
 
 public class DbAction {
-//	String url ="https://kontroll.insider.no/insider/";
-	String url ="http://192.168.221.48:8080/insider/";
+	String url ="https://kontroll.insider.no/insider/";
+//	String url ="http://192.168.221.48:8080/insider/";
 	public void retrieveCustomers(){	
 		new RetrieveCustomers().execute(url, Globals.user.getDepartment());
 	}
