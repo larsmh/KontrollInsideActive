@@ -1,11 +1,6 @@
 package com.insider.kontrollactiveModel;
 
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-
-
 public class User {
 	private int id;
 
