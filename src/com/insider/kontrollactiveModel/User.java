@@ -12,12 +12,13 @@ public class User {
 	private String phonenr, department, password, name;
 	private boolean admin;
 	
-	public User(int id, String phonenr, String password, String department, boolean admin){
+	public User(int id, String phonenr, String password, String department, boolean admin, String name){
 		this.id=id;
 		this.phonenr=phonenr;
 		this.password=password;
 		this.department=department;
 		this.admin=admin;
+		this.name=name;
 	}
 	public int getId(){
 		return id;
