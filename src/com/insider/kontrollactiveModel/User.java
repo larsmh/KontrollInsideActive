@@ -44,16 +44,6 @@ public class User {
 	public boolean getAdmin(){
 		return admin;
 	}
-	public User(Parcel in){
-        String[] data = new String[3];
-
-        in.readStringArray(data);
-        this.name = data[0];
-       
-    }
-
-    public int describeContents(){
-        return 0;
-    }
+	
 
 }
