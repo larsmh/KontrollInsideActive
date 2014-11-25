@@ -167,7 +167,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
 	public void signatureDialog(){
 		
 		final Dialog signDialog = new Dialog(context);
-		signDialog.setTitle("Signèr i det hvite feltet");
+		signDialog.setTitle("SignÃ©r i det hvite feltet");
 		signDialog.setContentView(R.layout.signature_dialog_view);
 		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
 		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);
@@ -363,7 +363,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
          form.setField("boning_field", "Boning");
          form.setField("hovedrenhold_field", "Hovedrenhold");
          form.setField("trappevask_field", "Trappevask");
-         form.setField("økt_frekvens_field", "Økt frekvens");
+         form.setField("Ã¸kt_frekvens_field", "Ã¸kt frekvens");
          
          
          if(vinduspuss_check){
@@ -387,7 +387,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
          }
          
          if(okt_frekvens_check){
-        	 form.setField("økt_frekvens_box", "Yes");
+        	 form.setField("ï¿½kt_frekvens_box", "Yes");
          }
          
         

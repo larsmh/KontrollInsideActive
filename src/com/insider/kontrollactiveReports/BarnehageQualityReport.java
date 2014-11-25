@@ -146,7 +146,7 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
 	@Override
 	public void signatureDialog() {
 		final Dialog signDialog = new Dialog(context);
-		signDialog.setTitle("Signèr i det hvite feltet");
+		signDialog.setTitle("SignÃ©r i det hvite feltet");
 		signDialog.setContentView(R.layout.signature_dialog_view);
 		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
 		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);
@@ -219,7 +219,7 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
          AcroFields form = stamper.getAcroFields();
          
          form.setField("date_field", date);
-         form.setField("executor_field", "Thomas Franang");
+         form.setField("executor_field", Globals.user.getName());
          form.setField("customer_field", cust.getName());
          form.setField("department_field", cust.getDepartment());
          form.setField("type_of_report_field", "Kvalitetsrapport Barnehage");
@@ -286,8 +286,8 @@ public class BarnehageQualityReport extends ActionBarActivity implements ReportI
          form.setField("kjokkenskap_utvendig_field", kjokkenskap_spinner.getSelectedItem().toString());
          form.setField("kjokkenskap_utvendig_beskrivelse", kjokkenskap_text.getText().toString());
          
-         form.setField("håndvask_desinfisering_field", handvask_spinner.getSelectedItem().toString());
-         form.setField("håndvask_desinfisering_beskrivelse_field", handvask_text.getText().toString());
+         form.setField("hï¿½ndvask_desinfisering_field", handvask_spinner.getSelectedItem().toString());
+         form.setField("hï¿½ndvask_desinfisering_beskrivelse_field", handvask_text.getText().toString());
          
          form.setField("wc_field", wc_spinner.getSelectedItem().toString());
          form.setField("wc_beskrivelse_field", wc_text.getText().toString());

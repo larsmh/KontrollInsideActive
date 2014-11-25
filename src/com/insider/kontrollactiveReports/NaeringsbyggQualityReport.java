@@ -85,7 +85,7 @@ public class NaeringsbyggQualityReport extends ActionBarActivity implements Repo
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.naeringsbygg_quality_report);
-		this.setTitle("Kvalitetsrapport Næringsbygg");
+		this.setTitle("Kvalitetsrapport NÃ¦ringsbygg");
 		
 		msg = "";
 		date = new Date().getDate();
@@ -161,7 +161,7 @@ public class NaeringsbyggQualityReport extends ActionBarActivity implements Repo
 	public void signatureDialog(){
 		
 		final Dialog signDialog = new Dialog(context);
-		signDialog.setTitle("Signèr i det hvite feltet");
+		signDialog.setTitle("SignÃ©r i det hvite feltet");
 		signDialog.setContentView(R.layout.signature_dialog_view);
 		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
 		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);

@@ -145,7 +145,7 @@ public class EiendomsdriftQualityReport extends ActionBarActivity implements Rep
 	@Override
 	public void signatureDialog() {
 		final Dialog signDialog = new Dialog(context);
-		signDialog.setTitle("Signèr i det hvite feltet");
+		signDialog.setTitle("SignÃ©r i det hvite feltet");
 		signDialog.setContentView(R.layout.signature_dialog_view);
 		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
 		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);
@@ -218,7 +218,7 @@ public class EiendomsdriftQualityReport extends ActionBarActivity implements Rep
          AcroFields form = stamper.getAcroFields();
          
          form.setField("date_field", date);
-         form.setField("executor_field", "Thomas Franang");
+         form.setField("executor_field", Globals.user.getName());
          form.setField("customer_field", cust.getName());
          form.setField("department_field", cust.getDepartment());
          form.setField("type_of_report_field", "Kvalitetsrapport Barnehage");

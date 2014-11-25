@@ -62,7 +62,7 @@ public class ButikkQualityReport extends ActionBarActivity implements ReportInte
 	Context context;
 	String signFilePath;
 	
-	EditText kontaktperson_text, harde_text, gulvlister_text, hyller_text, panteomrade_text, kjole_text, kasseområde_text, handvask_desinfisering_text, wc_dispensere_text,
+	EditText kontaktperson_text, harde_text, gulvlister_text, hyller_text, panteomrade_text, kjole_text, kasseomrÃ¥de_text, handvask_desinfisering_text, wc_dispensere_text,
 	under_faste_matter_text, glass_inngangsparti_text, annet1_text, annet2_text, annet3_text, temp_text, bemerkninger_text;
 	
 	RadioGroup radio_arbeidsplassmappe, radio_kundemappe, radio_temp;
@@ -151,7 +151,7 @@ public class ButikkQualityReport extends ActionBarActivity implements ReportInte
 	public void signatureDialog() {
 		
 		final Dialog signDialog = new Dialog(context);
-		signDialog.setTitle("Signèr i det hvite feltet");
+		signDialog.setTitle("SignÃ©r i det hvite feltet");
 		signDialog.setContentView(R.layout.signature_dialog_view);
 		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
 		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);
@@ -224,7 +224,7 @@ public class ButikkQualityReport extends ActionBarActivity implements ReportInte
         AcroFields form = stamper.getAcroFields();
 		
         form.setField("date_field", date);
-        form.setField("executor_field", "Thomas");
+        form.setField("executor_field", Globals.user.getName());
         form.setField("customer_field", cust.getName());
         form.setField("department_field", cust.getDepartment());
         form.setField("type_of_report_field", "kvalitetsrapport Butikk");
@@ -276,7 +276,7 @@ public class ButikkQualityReport extends ActionBarActivity implements ReportInte
         form.setField("kjolelager_beskrivelse_field", kjole_text.getText().toString());
         
         form.setField("kasseomrade_field",kasseomrade_spinner.getSelectedItem().toString());
-        form.setField("kasseomrade_beskrivelse_field", kasseområde_text.getText().toString());
+        form.setField("kasseomrade_beskrivelse_field", kasseomrÃ¥de_text.getText().toString());
         
         form.setField("handvask_field",handvask_desinfisering_spinner.getSelectedItem().toString());
         form.setField("handvask_beskrivelse_field", handvask_desinfisering_text.getText().toString());
@@ -461,7 +461,7 @@ public class ButikkQualityReport extends ActionBarActivity implements ReportInte
 		hyller_text = (EditText) findViewById(R.id.hyller_text);
 		panteomrade_text = (EditText) findViewById(R.id.panteomrade_text);
 		kjole_text = (EditText) findViewById(R.id.kjole_text);
-		kasseområde_text = (EditText) findViewById(R.id.kasseomrade_text);
+		kasseomrÃ¥de_text = (EditText) findViewById(R.id.kasseomrade_text);
 		handvask_desinfisering_text = (EditText) findViewById(R.id.handvask_desinfisering_text);
 		wc_dispensere_text = (EditText) findViewById(R.id.wc_dispensere_text);
 		under_faste_matter_text = (EditText) findViewById(R.id.under_faste_matter_text);
