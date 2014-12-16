@@ -158,13 +158,18 @@ public class MainActivity extends ActionBarActivity {
          			Toast.LENGTH_LONG).show();
     		return;
     	}
-    	String title="Registrering av oppdrag";
-    	String message="Er du sikker på at du vil registrere dette oppdraget?";
+    	String title;
+    	String message;
     	if(msgText.isShown()){
     		title="Sending av avviksmelding";
     		message="Er du sikker på at du vil sende avviksmeldingen?";
     		type = 1;
-    	}	
+    	}
+    	else{
+    		title="Registrering av oppdrag";
+        	message="Er du sikker på at du vil registrere dette oppdraget?";
+        	type = 0;
+    	}
     	new AlertDialog.Builder(this)
     	.setTitle(title)
         .setMessage(message)
