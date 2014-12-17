@@ -162,12 +162,12 @@ public class MainActivity extends ActionBarActivity {
     	String message;
     	if(msgText.isShown()){
     		title="Sending av avviksmelding";
-    		message="Er du sikker pÃ¥ at du vil sende avviksmeldingen?";
+    		message="Er du sikker på at du vil sende avviksmeldingen?";
     		type = 1;
     	}
     	else{
     		title="Registrering av oppdrag";
-        	message="Er du sikker pÃ¥ at du vil registrere dette oppdraget?";
+        	message="Er du sikker på at du vil registrere dette oppdraget?";
         	type = 0;
     	}
     	new AlertDialog.Builder(this)

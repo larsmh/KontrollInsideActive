@@ -94,7 +94,7 @@ public class Email {
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
 
-//            dbAction.registerJob(custID, date);
+          //  dbAction.registerJob(custID, date);
             post.setEntity(builder.build());
             response = client.execute(post);
             
