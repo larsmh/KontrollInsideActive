@@ -15,6 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
+import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
 
 import android.os.Environment;
@@ -31,6 +32,7 @@ public class Email {
 	String department;
 	String type;
 	
+	Customer cust;
 	File file; 
 	Boolean hasAttachement;
 	int custID;
@@ -39,10 +41,11 @@ public class Email {
 	
 	public Email() {
 		
-		this.custID = custID;
 		client = new DefaultHttpClient();
 		builder = MultipartEntityBuilder.create();
 		hasAttachement = false;
+		
+		date = new Date().getDate();
 	}
 	
 	public void setTo(String[] recipient){
@@ -63,13 +66,15 @@ public class Email {
 				+body+"\"";
 	}
 	
-	public void setDate(String date){
-		this.date = "\"Date\":\""+date+"\"";
-	}
+	
 	
 	public void setDepartment(String deparment){
 		this.department = "\"Department\":\""+Globals.user.getDepartment().toLowerCase()+"\"";
 		
+	}
+	
+	public void setCustomer(Customer cust){
+		this.cust = cust;
 	}
 	
 	public void setType(int type){
@@ -94,10 +99,11 @@ public class Email {
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
 
-//            dbAction.registerJob(custID, date);
+            dbAction.registerJob(cust.getName(), Globals.user.getName(), date);
             post.setEntity(builder.build());
             response = client.execute(post);
-            
+            Log.d("!!kunde", cust.getName());
+            Log.d("!!kunde", Globals.user.getName()+" "+date);
             
         	}
         	else{
@@ -112,9 +118,11 @@ public class Email {
 
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
         		
+        		dbAction.registerJob(cust.getName(), Globals.user.getName(), date);
         		post.setEntity(builder.build());
                 response = client.execute(post);
-                
+                Log.d("!!kunde", cust.getName());
+                Log.d("!!kunde", Globals.user.getName()+" "+date);
                 
         	}
 

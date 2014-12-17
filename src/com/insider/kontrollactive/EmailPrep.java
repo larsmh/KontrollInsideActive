@@ -140,6 +140,7 @@ public class EmailPrep {
             			"Insider Facility Services AS");
             	email.setDepartment(cust.getDepartment());
             	email.setType(type);
+            	email.setCustomer(cust);
             	
             }
             
@@ -152,6 +153,7 @@ public class EmailPrep {
             			"Denne mailen ble sent: "+lines[1]); 		
             	email.setDepartment(cust.getDepartment());
             	email.setType(type);
+            	email.setCustomer(cust);
             }
             
             
@@ -165,6 +167,8 @@ public class EmailPrep {
             			"Insider Facility Services AS");
             	email.setDepartment(cust.getDepartment());
             	email.setType(type);
+            	email.setCustomer(cust);
+            	
             }
 					
 			list.add(email);
