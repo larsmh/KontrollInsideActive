@@ -25,9 +25,10 @@ public class RegisterJob extends AsyncTask<String, Integer, Long>{
  
             // create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
- 
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setHeader("Authorization", "Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
             // make POST request to the given URL
-            HttpResponse httpResponse = httpclient.execute(new HttpPost(url));
+            HttpResponse httpResponse = httpclient.execute(httpPost);
         } catch (Exception e) {
             Log.d("!!!", e.getLocalizedMessage());
         }
