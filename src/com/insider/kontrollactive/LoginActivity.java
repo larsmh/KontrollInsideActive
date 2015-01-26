@@ -24,8 +24,6 @@ public class LoginActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d("!!!", "hei");
-		
 		SharedPreferences userData = getSharedPreferences("UserFile", 0);
 		int idData = userData.getInt("id", 0);
 		String phoneData = userData.getString("phonenr", "null");
@@ -71,7 +69,7 @@ public class LoginActivity extends ActionBarActivity {
 		}
 		else{
 			Toast.makeText(getApplicationContext(), 
-				"Kan ikke finne denne brukeren. Telefonnummeret kan vÃ¦re feil, eller nettilgangen dÃ¥rlig",
+				"Kan ikke finne denne brukeren. Telefonnummeret kan være feil, eller nettilgangen dårlig",
      			Toast.LENGTH_LONG).show();
 		}
 	}

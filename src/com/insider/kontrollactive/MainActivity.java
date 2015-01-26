@@ -271,6 +271,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume (){
     	super.onResume();
     	updateList();
+    	/*InputMethodManager imm =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(custSelect, 0);
+    	imm =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);*/
     }
     private void logout(){
     	SharedPreferences userData = getSharedPreferences("UserFile", 0);

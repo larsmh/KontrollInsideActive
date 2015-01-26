@@ -30,7 +30,6 @@ public class RetrieveCustomers extends AsyncTask<String, Integer, Long> {
 	@Override
 	protected Long doInBackground(String... params) {
         String url=params[0]+"customer/?dep="+params[1];
-        Log.d("!!!!", url);
         try {
  
             // create HttpClient
