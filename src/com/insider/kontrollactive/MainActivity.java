@@ -6,16 +6,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
 import java.util.Calendar;
+
 import com.insider.kontrollactiveDatabase.CustomerListDB;
 import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
+
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
-
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -275,6 +275,16 @@ public class MainActivity extends ActionBarActivity {
         imm.showSoftInput(custSelect, 0);*/
     	InputMethodManager imm =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+        try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        final ActionBarActivity a = this;
+        ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(a, android.R.layout.simple_list_item_single_choice, Globals.custList);
+		custSelect.setAdapter(adapter);
+		Log.d("!!!", "fixed");
     }
     private void logout(){
     	SharedPreferences userData = getSharedPreferences("UserFile", 0);
