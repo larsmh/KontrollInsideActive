@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
 				if(Globals.custList!=null){
 				ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(a, android.R.layout.simple_list_item_single_choice, Globals.custList);
 				custSelect.setAdapter(adapter);
-				}				
+				}
 			}
         });
         custSelect.setOnItemClickListener(new OnItemClickListener() {
@@ -154,7 +154,7 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde pÃ¥ nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
@@ -162,12 +162,12 @@ public class MainActivity extends ActionBarActivity {
     	String message;
     	if(msgText.isShown()){
     		title="Sending av avviksmelding";
-    		message="Er du sikker pÃ¥ at du vil sende avviksmeldingen?";
+    		message="Er du sikker på at du vil sende avviksmeldingen?";
     		type = 1;
     	}
     	else{
     		title="Registrering av oppdrag";
-        	message="Er du sikker pÃ¥ at du vil registrere dette oppdraget?";
+        	message="Er du sikker på at du vil registrere dette oppdraget?";
         	type = 0;
     	}
     	new AlertDialog.Builder(this)
@@ -247,7 +247,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_log_out) {
         	new AlertDialog.Builder(this)
         	.setTitle("Utlogging")
-            .setMessage("Er du sikker pÃ¥ at du vil logge ut?")
+            .setMessage("Er du sikker på at du vil logge ut?")
             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             	public void onClick(DialogInterface dialog, int which) { 
             		logout();
@@ -271,18 +271,15 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume (){
     	super.onResume();
     	updateList();
-    	/*InputMethodManager imm =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(custSelect, 0);*/
     	InputMethodManager imm =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
         try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        final ActionBarActivity a = this;
-        ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(a, android.R.layout.simple_list_item_single_choice, Globals.custList);
+        ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_list_item_single_choice, Globals.custList);
 		custSelect.setAdapter(adapter);
 		Log.d("!!!", "fixed");
     }
@@ -366,7 +363,7 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde pï¿½ nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
