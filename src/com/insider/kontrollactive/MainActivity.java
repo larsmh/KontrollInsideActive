@@ -366,7 +366,7 @@ public class MainActivity extends ActionBarActivity {
     	cust = getCustomer(custSelect.getText().toString());
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
-    				"Ingen gyldig kunde valgt. Velg kunde p� nytt!",
+    				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
          			Toast.LENGTH_LONG).show();
     		return;
     	}
