@@ -85,7 +85,7 @@ public class NaeringsbyggQualityReport extends ActionBarActivity implements Repo
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.naeringsbygg_quality_report);
-		this.setTitle("Kvalitetsrapport NÃ¦ringsbygg");
+		this.setTitle("Kvalitetsrapport Næringsbygg");
 		
 		msg = "";
 		date = new Date().getDate();

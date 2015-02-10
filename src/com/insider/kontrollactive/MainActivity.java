@@ -199,8 +199,6 @@ public class MainActivity extends ActionBarActivity {
     		msg=msgText.getText().toString();
     		}
     	
-    	Log.d("!!inne i finish","lol");
-    	
     	EmailGenerator gen = new EmailGenerator(this,cust,date,msg,emailList,attachement,type, Globals.user.getId());
     	gen.sendEmail();
     	msgText.setText("");

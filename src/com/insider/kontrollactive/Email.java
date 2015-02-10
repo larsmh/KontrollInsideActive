@@ -118,13 +118,9 @@ public class Email {
         		post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
 
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
-        		
-        		dbAction.registerJob(cust.getName(), Globals.user.getName(), date);
+        		dbAction.registerJob(""+cust.getId(), ""+Globals.user.getId(), date);
         		post.setEntity(builder.build());
                 response = client.execute(post);
-                Log.d("!!kunde", cust.getName());
-                Log.d("!!kunde", Globals.user.getName()+" "+date);
-                
         	}
 
             

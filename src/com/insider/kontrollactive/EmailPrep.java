@@ -120,12 +120,6 @@ public class EmailPrep {
             email.setTo(toArr); 
 //            email.setFrom("franangthomas@gmail.com"); 
             
-            DbAction dbAction = new DbAction();
-            
-
-        	if(type == 0 || type == 3){
-        	Log.d("!!asd",lines[3]+" "+lines[4]+ " "+ lines[1]);
-        	dbAction.registerJob(lines[3], lines[4], lines[1]);}
             
             if(type == 3){
             	Log.d("!!attachment er", "lol "+attachement+"");
