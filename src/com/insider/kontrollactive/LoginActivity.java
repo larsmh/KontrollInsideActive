@@ -69,7 +69,7 @@ public class LoginActivity extends ActionBarActivity {
 		}
 		else{
 			Toast.makeText(getApplicationContext(), 
-				"Kan ikke finne denne brukeren. Telefonnummeret kan være feil, eller nettilgangen dårlig",
+				"Kan ikke finne denne brukeren. Telefonnummeret kan vÃ¦re feil, eller nettilgangen dÃ¥rlig",
      			Toast.LENGTH_LONG).show();
 		}
 	}

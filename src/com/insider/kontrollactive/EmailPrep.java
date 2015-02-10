@@ -128,7 +128,7 @@ public class EmailPrep {
             	
             	email.setAttachementFilePath(attachement);
             	email.setSubject("Kvalitetsrapport "+cust.getName()+ " "+ lines[1]); 
-            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utført "+lines[1]+"\n"
+            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utfÃ¸rt "+lines[1]+"\n"
             			+ "\n"+
             			"mvh\n"+
             			"Insider Facility Services AS");
@@ -140,8 +140,8 @@ public class EmailPrep {
             
             if(type == 1){
             	email.setAttachement(hasAttachement);
-            	email.setSubject("Renhold ikke mulig på grunn av avvik. "+cust.getName()+ " "+ lines[1]);
-            	email.setBody("Kjære kunde,\n"
+            	email.setSubject("Renhold ikke mulig pÃ¥ grunn av avvik. "+cust.getName()+ " "+ lines[1]);
+            	email.setBody("KjÃ¦re kunde,\n"
 
             				+lines[2]+"\n"+
             			"Denne mailen ble sent: "+lines[1]); 		
@@ -154,8 +154,8 @@ public class EmailPrep {
             
             if(type == 0) {
             	email.setAttachement(hasAttachement);
-            	email.setSubject("Kvittering for utført renhold, "+cust.getName()+ " "+ lines[1]); 
-            	email.setBody("Insider har nå utført dagens renhold.\n" +
+            	email.setSubject("Kvittering for utfÃ¸rt renhold, "+cust.getName()+ " "+ lines[1]); 
+            	email.setBody("Insider har nÃ¥ utfÃ¸rt dagens renhold.\n" +
             			"\n"+
             			"mvh\n"+
             			"Insider Facility Services AS");

@@ -362,6 +362,7 @@ public class MainActivity extends ActionBarActivity {
     	if(cust==null){
     		Toast.makeText(getApplicationContext(), 
     				"Ingen gyldig kunde valgt. Velg kunde på nytt!",
+
          			Toast.LENGTH_LONG).show();
     		return;
     	}
