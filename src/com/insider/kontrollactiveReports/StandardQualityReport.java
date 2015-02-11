@@ -121,7 +121,7 @@ public class StandardQualityReport extends ActionBarActivity implements ReportIn
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Toast.makeText(v.getContext(), "Done!", Toast.LENGTH_LONG)
+				Toast.makeText(v.getContext(), "Rapport laget!", Toast.LENGTH_LONG)
 				.show();
 				
 				

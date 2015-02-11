@@ -1,8 +1,6 @@
 package com.insider.kontrollactive;
 
 import java.io.File;
-import java.io.InputStream;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -17,8 +15,6 @@ import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
-
-import android.os.Environment;
 import android.util.Log;
 
 public class Email {
@@ -82,7 +78,6 @@ public class Email {
 	}
 	
 	public void send(){
-		Log.d("!!asd", this.department);
 		DbAction dbAction = new DbAction();
 		
 		HttpResponse response;
@@ -93,27 +88,18 @@ public class Email {
         	String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
         	StringEntity body = new StringEntity(json);
         	body.setContentType("application/json");
-//        	HttpPost post = new HttpPost("http://192.168.221.48:8080/insider/email/");
         	HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
             post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
             builder.addPart("file", new FileBody(file));
             builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
-
-
-            dbAction.registerJob(""+cust.getId(), ""+Globals.user.getId(), date);
             post.setEntity(builder.build());
             response = client.execute(post);
-            Log.d("!!kunde", cust.getName());
-            Log.d("!!kunde", Globals.user.getName()+" "+date);
             
         	}
         	else{
         		String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
         		StringEntity body = new StringEntity(json);
-        		body.setContentType("application/json");
-
-//        		HttpPost post = new HttpPost("http://192.168.221.48:8080/insider/email/");
-        		
+        		body.setContentType("application/json");        		
         		HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
         		post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
 

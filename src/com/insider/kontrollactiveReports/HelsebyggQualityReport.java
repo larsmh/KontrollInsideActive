@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -114,7 +112,7 @@ public class HelsebyggQualityReport extends ActionBarActivity implements ReportI
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Toast.makeText(v.getContext(), "Done!", Toast.LENGTH_LONG)
+				Toast.makeText(v.getContext(), "Rapport laget!", Toast.LENGTH_LONG)
 				.show();
 				
 				
@@ -180,7 +178,6 @@ public class HelsebyggQualityReport extends ActionBarActivity implements ReportI
 					drawView.getDrawingCache().compress(CompressFormat.PNG, 80, stream);
 					Toast.makeText(context, "Signatur lagret i pdf!", Toast.LENGTH_SHORT).show();
 					signFilePath = signFileName;
-					Log.d("!!Sign",signFilePath);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -413,10 +410,6 @@ public class HelsebyggQualityReport extends ActionBarActivity implements ReportI
 		            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
 		                    Uri.fromFile(photoFile));
 		          startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-		          Log.d("!!Pic1", photoFile.getAbsolutePath());
-		        
-		          
-		          
 		          pictureList.add(photoFile);
 		          stringList.add("bilde."+pictureList.size());
 		        }

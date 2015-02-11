@@ -23,23 +23,15 @@ import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class QualityReportActivity extends ActionBarActivity {
@@ -113,9 +105,6 @@ public class QualityReportActivity extends ActionBarActivity {
 	}
 	
 	public void create(View view) throws Exception{
-
-		
-		Log.d("!!pdf", dir.getAbsolutePath());
 		try {
 	      Document document = new Document();
 	      PdfWriter.getInstance(document, new FileOutputStream(file));

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -114,7 +113,7 @@ public class NaeringsbyggQualityReport extends ActionBarActivity implements Repo
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Toast.makeText(v.getContext(), "Done!", Toast.LENGTH_LONG)
+				Toast.makeText(v.getContext(), "Rapport laget!", Toast.LENGTH_LONG)
 				.show();
 				
 				

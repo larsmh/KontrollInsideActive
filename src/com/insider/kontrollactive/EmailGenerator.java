@@ -1,19 +1,11 @@
 package com.insider.kontrollactive;
 
 import java.util.ArrayList;
-import java.util.Date;
-
-import android.app.ActivityManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
-import com.insider.kontrollactiveModel.Globals;
 
 public class EmailGenerator {
 
@@ -44,18 +36,12 @@ public class EmailGenerator {
     	prepper.createLocalEmail();
     	
 //    	prepper.printNumberOfFiles();
-    	
-//    	Log.d("!!inne i sendEmail",cust.getEmail()+date);
-    	 ConnectivityManager connec = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-       if (connec != null && 
+    	ConnectivityManager connec = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connec != null && 
            (connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) || 
-           (connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED)){ 
-        	Log.d("!!inne i sendEmail","Online!!");
+           (connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED)){
         	
-        	prepper.setEmailListContent();
-        	
-        	Log.d("Lum", "Number of emails in list: "+emailList.size());
-				
+        	prepper.setEmailListContent();	
         	SendEmailTask task = new SendEmailTask(emailList);
         	task.execute();
         	Toast.makeText(context, "Email sendt!", Toast.LENGTH_SHORT).show();
@@ -63,14 +49,7 @@ public class EmailGenerator {
         } else if (connec.getNetworkInfo(0).getState() == NetworkInfo.State.DISCONNECTED ||
                  connec.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED ) {            
                 //Not connected.
-        	Log.d("!!inne i sendEmail","ikke connected");
-        	
-        	Log.d("Lum", "Number of emails in list: "+emailList.size());
-        		
                 Toast.makeText(context.getApplicationContext(), "Ingen tilgang til internett.", Toast.LENGTH_LONG).show();
         }
-        
-//        Log.d("!!inne i sendEmail?", "woot?");
-//        prepper.deleteAllFiles();
     }
 }

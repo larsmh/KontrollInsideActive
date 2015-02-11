@@ -6,16 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import com.insider.kontrollactiveDatabase.CustomerListDB;
 import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
-
 import android.support.v7.app.ActionBarActivity;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,8 +24,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,13 +38,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.insider.kontrollactiveDatabase.CustomerListDB;
-import com.insider.kontrollactiveDatabase.DbAction;
-import com.insider.kontrollactiveModel.Customer;
-import com.insider.kontrollactiveModel.Date;
-import com.insider.kontrollactiveModel.Globals;
-import com.sun.mail.imap.Utility;
 
 public class MainActivity extends ActionBarActivity {
 	private AutoCompleteTextView custSelect;
@@ -194,7 +181,6 @@ public class MainActivity extends ActionBarActivity {
     	//Sending email
     	date = new Date().getDate();
     	msg="--1";
-    	Log.d("!!msg", "Message: "+msg);
     	if(msgText.isShown()){
     		msg=msgText.getText().toString();
     		}
@@ -279,7 +265,6 @@ public class MainActivity extends ActionBarActivity {
 		}
         ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_list_item_single_choice, Globals.custList);
 		custSelect.setAdapter(adapter);
-		Log.d("!!!", "fixed");
     }
     private void logout(){
     	SharedPreferences userData = getSharedPreferences("UserFile", 0);
@@ -342,14 +327,14 @@ public class MainActivity extends ActionBarActivity {
     		            try {
     		                in.close();
     		            } catch (IOException e) {
-    		                Log.d("!!oops", "Exception while closing input stream",e);
+    		                e.printStackTrace();
     		            }
     		        }
     		        if(out!=null){
     		            try {
     		                out.close();
     		            } catch (IOException e) {
-    		                Log.d("!!oops", "Exception while closing output stream",e);
+    		                e.printStackTrace();
     		            }
     		        }
     		    }

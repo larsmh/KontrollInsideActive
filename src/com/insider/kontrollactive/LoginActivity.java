@@ -8,13 +8,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class LoginActivity extends ActionBarActivity {
@@ -40,13 +37,6 @@ public class LoginActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_login);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.in_logo);
-		
-		/*String depts[] = {"Trondheim", "Oslo", "Bergen"};
-		dept = (Spinner) findViewById(R.id.dept);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, depts);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		dept.setAdapter(adapter);*/
-		
 		phonenr = (EditText) findViewById(R.id.phonenr);
 		password = (EditText) findViewById(R.id.password);
 		

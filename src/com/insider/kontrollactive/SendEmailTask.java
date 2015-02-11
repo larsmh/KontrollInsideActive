@@ -1,11 +1,7 @@
 package com.insider.kontrollactive;
 
 import java.util.ArrayList;
-
-import com.insider.kontrollactiveModel.Customer;
-
 import android.os.AsyncTask;
-
 public class SendEmailTask extends AsyncTask<Void, Void, Void> {
 
 	ArrayList<Email> emailList;

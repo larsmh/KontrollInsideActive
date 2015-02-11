@@ -1,13 +1,7 @@
 package com.insider.kontrollactiveDatabase;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
@@ -20,10 +14,8 @@ import org.json.JSONTokener;
 
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Globals;
-import com.insider.kontrollactiveModel.User;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class RetrieveCustomers extends AsyncTask<String, Integer, Long> {
 	
@@ -59,7 +51,7 @@ public class RetrieveCustomers extends AsyncTask<String, Integer, Long> {
 	        	Globals.custList.add(new Customer(id, name, email, dept));
             }
         } catch (Exception e) {
-            Log.d("!!!", e.getLocalizedMessage());
+            e.printStackTrace();
         }
 		return null;
 	}

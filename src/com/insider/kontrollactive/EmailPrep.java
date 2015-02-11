@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Globals;
 
@@ -48,8 +45,6 @@ public class EmailPrep {
     	String name = cust.getName();
     	String[] s = {email, date, msg, ""+cust.getId(), ""+Globals.user.getId()};
     	File file;    	
-		
-//    	Log.d("!!inne i CreateLocalEamil", "lol "+msg+" "+s[0]+" "+s[1]+" "+s[2]);
 		file = new File(myDir.getAbsolutePath(),name+myDir.list().length+".txt");
 		//Create a new file.
 		try {
@@ -114,21 +109,16 @@ public class EmailPrep {
 			
 			File dir = new File(Environment.getExternalStorageDirectory(), "insider_data");
 			Email email = new Email();
-				
-			Log.d("!!Inne i prepper", cust.getEmail());	
 			String[] toArr = {lines[0]}; 
-            email.setTo(toArr); 
-//            email.setFrom("franangthomas@gmail.com"); 
-            
+            email.setTo(toArr);
             
             if(type == 3){
-            	Log.d("!!attachment er", "lol "+attachement+"");
             	hasAttachement = true;
             	email.setAttachement(hasAttachement);
             	
             	email.setAttachementFilePath(attachement);
             	email.setSubject("Kvalitetsrapport "+cust.getName()+ " "+ lines[1]); 
-            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utfÃ¸rt "+lines[1]+"\n"
+            	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utført "+lines[1]+"\n"
             			+ "\n"+
             			"mvh\n"+
             			"Insider Facility Services AS");
@@ -140,8 +130,8 @@ public class EmailPrep {
             
             if(type == 1){
             	email.setAttachement(hasAttachement);
-            	email.setSubject("Renhold ikke mulig pÃ¥ grunn av avvik. "+cust.getName()+ " "+ lines[1]);
-            	email.setBody("KjÃ¦re kunde,\n"
+            	email.setSubject("Renhold ikke mulig på grunn av avvik. "+cust.getName()+ " "+ lines[1]);
+            	email.setBody("Kjære kunde,\n"
 
             				+lines[2]+"\n"+
             			"Denne mailen ble sent: "+lines[1]); 		
@@ -154,8 +144,8 @@ public class EmailPrep {
             
             if(type == 0) {
             	email.setAttachement(hasAttachement);
-            	email.setSubject("Kvittering for utfÃ¸rt renhold, "+cust.getName()+ " "+ lines[1]); 
-            	email.setBody("Insider har nÃ¥ utfÃ¸rt dagens renhold.\n" +
+            	email.setSubject("Kvittering for utført renhold, "+cust.getName()+ " "+ lines[1]); 
+            	email.setBody("Insider har nå utført dagens renhold.\n" +
             			"\n"+
             			"mvh\n"+
             			"Insider Facility Services AS");
