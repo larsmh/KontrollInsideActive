@@ -27,6 +27,7 @@ public class Email {
 	String path;
 	String department;
 	String type;
+	int intType;
 	
 	Customer cust;
 	File file; 
@@ -58,7 +59,7 @@ public class Email {
 	
 	
 	public void setBody(String body){
-		this.body = "\"Message\":\"Hei,\n"
+		this.body = "\"Message\":\"Hei!\n"
 				+body+"\"";
 	}
 	
@@ -75,6 +76,7 @@ public class Email {
 	
 	public void setType(int type){
 		this.type = "\"Type\":\""+type+"\"";
+		this.intType = type;
 	}
 	
 	public void send(){
@@ -84,29 +86,31 @@ public class Email {
         StringBody sb;
         try {
         	if(hasAttachement){
-        	file = new File(path);
-        	String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
-        	StringEntity body = new StringEntity(json);
-        	body.setContentType("application/json");
-        	HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
-            post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
-            builder.addPart("file", new FileBody(file));
-            builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
-            post.setEntity(builder.build());
-            response = client.execute(post);
+	        	file = new File(path);
+	        	String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
+	        	StringEntity body = new StringEntity(json);
+	        	body.setContentType("application/json");
+	        	HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
+	            post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
+	            builder.addPart("file", new FileBody(file));
+	            builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
+	            post.setEntity(builder.build());
+	            response = client.execute(post);
             
         	}
         	else{
+        		Log.d("!!!", "funker dette?");
         		String json = "{"+recipient[0]+","+subject+","+body+","+department+","+type+"}";
         		StringEntity body = new StringEntity(json);
         		body.setContentType("application/json");        		
         		HttpPost post = new HttpPost("https://kontroll.insider.no/insider/email/");
         		post.setHeader("Authorization","Basic a29udHJvbGxpbnNpZGVhcHBAaW5zaWRlci5ubzp0MnJRZm0yZQ==");
-
         		builder.addTextBody("email",json,ContentType.APPLICATION_JSON);
-        		dbAction.registerJob(""+cust.getId(), ""+Globals.user.getId(), date);
+        		if(intType!=1)
+        			dbAction.registerJob(""+cust.getId(), ""+Globals.user.getId(), date);
         		post.setEntity(builder.build());
                 response = client.execute(post);
+                Log.d("!!!", "funker");
         	}
 
             

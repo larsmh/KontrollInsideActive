@@ -145,7 +145,7 @@ public class EiendomsdriftQualityReport extends ActionBarActivity implements Rep
 	@Override
 	public void signatureDialog() {
 		final Dialog signDialog = new Dialog(context);
-		signDialog.setTitle("Signér i det hvite feltet");
+		signDialog.setTitle("Signer i hvitt felt");
 		signDialog.setContentView(R.layout.signature_dialog_view);
 		drawView = (SignatureView)signDialog.findViewById(R.id.drawing);
 		Button okButton = (Button) signDialog.findViewById(R.id.signature_dialog_okButton);

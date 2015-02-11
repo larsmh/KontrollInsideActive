@@ -131,10 +131,9 @@ public class EmailPrep {
             if(type == 1){
             	email.setAttachement(hasAttachement);
             	email.setSubject("Renhold ikke mulig på grunn av avvik. "+cust.getName()+ " "+ lines[1]);
-            	email.setBody("Kjære kunde,\n"
-
-            				+lines[2]+"\n"+
-            			"Denne mailen ble sent: "+lines[1]); 		
+            	email.setBody("Følgende avviksmelding ble registrert ved renhold den "+lines[1]+":\n\n"
+            				+lines[2]+"\n\n"+"mvh\n"+
+            			"Insider Facility Services AS"); 		
             	email.setDepartment(cust.getDepartment());
             	email.setType(type);
             	email.setCustomer(cust);
