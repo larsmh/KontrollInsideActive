@@ -34,7 +34,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		Toast.makeText( context, "Active Network Type : " + activeNetInfo.getTypeName(), Toast.LENGTH_SHORT ).show();
+    		
     	}
 	
     	if( mobNetInfo != null ){
@@ -48,7 +48,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		Toast.makeText( context, "Mobile Network Type : " + mobNetInfo.getTypeName(), Toast.LENGTH_SHORT ).show();
+    		
     	}
   	}
 }
