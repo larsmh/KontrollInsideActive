@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.insider.kontrollactive"
     android:versionCode="1"
-    android:versionName="1.14" >
+    android:versionName="1.15" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -47,6 +47,15 @@
         <activity android:name="com.insider.kontrollactiveReports.EiendomsdriftQualityReport"></activity>
         <activity android:name="com.insider.kontrollactiveReports.ButikkQualityReport"></activity>
         <activity android:name="com.insider.kontrollactiveReports.BarnehageQualityReport"></activity>
+    
+	
+	<receiver android:name="com.insider.kontrollactive.ConnectionChangeReceiver"
+          android:label="NetworkConnection">
+	 <intent-filter>
+	    <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+	 </intent-filter>
+	</receiver>
+    
     </application>
-
+    
 </manifest>

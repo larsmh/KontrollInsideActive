@@ -27,8 +27,14 @@ public class EmailPrep {
 	boolean hasAttachement;
 	int type;
 	
-	public EmailPrep(ArrayList<Email> list, Customer cust, String date, Context context, String msg, String attachement, int type, int custID) {
-		this.list = list;
+	public EmailPrep(Context context) {
+		this.context = context;
+		list = Globals.emaiList;
+		myDir = context.getDir("myDir", Context.MODE_PRIVATE);
+	}
+	
+	public EmailPrep(Customer cust, String date, Context context, String msg, String attachement, int type, int custID) {
+		list = Globals.emaiList;
 		this.date = date;
 		this.cust = cust;
 		this.context = context;
@@ -43,7 +49,10 @@ public class EmailPrep {
 
 		String email = cust.getEmail();
     	String name = cust.getName();
-    	String[] s = {email, date, msg, ""+cust.getId(), ""+Globals.user.getId()};
+    	String attachement = this.attachement;
+    	if(this.attachement == "") attachement = "no attachement";
+    	int type = this.type;
+    	String[] s = {email, date, msg, ""+cust.getId(), name, attachement, ""+type, ""+Globals.user.getId()};
     	File file;    	
 		file = new File(myDir.getAbsolutePath(),name+myDir.list().length+".txt");
 		//Create a new file.
@@ -72,6 +81,13 @@ public class EmailPrep {
 				writer.newLine();
 				writer.write(s[4]);
 				writer.newLine();
+				writer.write(s[5]);
+				writer.newLine();
+				writer.write(s[6]);
+				writer.newLine();
+				writer.write(s[7]);
+				writer.newLine();
+				
 			
 			writer.flush();
 			writer.close();
@@ -83,7 +99,7 @@ public class EmailPrep {
 	}
 	
 	public void setEmailListContent() throws Exception{
-		String lines[] = {"","","","",""};
+		String lines[] = {"","","","","","","",""};
 		String line;
 		
 		if( myDir.list().length != 0){
@@ -91,9 +107,9 @@ public class EmailPrep {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader(f.getAbsolutePath()));
 				try {
-					for (int j = 0; j < 5; j++) {
+					for (int j = 0; j < 8; j++) {
 						lines[j] = br.readLine();
-//						Log.d("!!", ""+lines[j]);
+						Log.d("!!Lumm", ""+lines[j]);
 					}
 					
 				} catch (IOException e) {
@@ -105,9 +121,17 @@ public class EmailPrep {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			int type = Integer.parseInt(lines[6]);
+			String custEmail = lines[0];
+			String custName = lines[4];
+			this.attachement = lines[5];
 			
-			
+			int custId = Integer.parseInt(lines[3]);
+		
 			File dir = new File(Environment.getExternalStorageDirectory(), "insider_data");
+			
+			Customer cust = new Customer(custId, custName, custEmail, "");
+			Log.d("!!Cust",""+cust.getId()+", "+cust.getName()+", "+cust.getEmail());
 			Email email = new Email();
 			String[] toArr = {lines[0]}; 
             email.setTo(toArr);
@@ -117,7 +141,7 @@ public class EmailPrep {
             	email.setAttachement(hasAttachement);
             	
             	email.setAttachementFilePath(attachement);
-            	email.setSubject("Kvalitetsrapport "+cust.getName()+ " "+ lines[1]); 
+            	email.setSubject("Kvalitetsrapport "+lines[4]+ " "+ lines[1]); 
             	email.setBody("Vedlagt ligger kvalitetsrapport, som ble utført "+lines[1]+"\n"
             			+ "\n"+
             			"mvh\n"+
@@ -155,6 +179,7 @@ public class EmailPrep {
             }
 					
 			list.add(email);
+			Log.d("Lumm test",""+Globals.emaiList+" , "+list);
 			f.delete();
 		}
 	}

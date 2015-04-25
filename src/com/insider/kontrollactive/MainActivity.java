@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+
 import com.insider.kontrollactiveDatabase.CustomerListDB;
 import com.insider.kontrollactiveDatabase.DbAction;
 import com.insider.kontrollactiveModel.Customer;
 import com.insider.kontrollactiveModel.Date;
 import com.insider.kontrollactiveModel.Globals;
+
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -24,6 +26,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
 	private String date, msg;
 	int type = 0;
 	DbAction db;
-	BroadcastReceiver receiver;
+	ConnectionChangeReceiver receiver;
 	
     protected void onCreate(Bundle savedInstanceState) {
         
@@ -184,14 +187,13 @@ public class MainActivity extends ActionBarActivity {
     	if(msgText.isShown()){
     		msg=msgText.getText().toString();
     		}
-    	
+ 
     	EmailGenerator gen = new EmailGenerator(this,cust,date,msg,emailList,attachement,type, Globals.user.getId());
     	gen.sendEmail();
     	msgText.setText("");
     	setMsgInvisible();
     	custSelect.setText("");
     }
-    
     
     private void updateList(){
     	ConnectivityManager connec = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -266,6 +268,8 @@ public class MainActivity extends ActionBarActivity {
         ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_list_item_single_choice, Globals.custList);
 		custSelect.setAdapter(adapter);
     }
+    
+    
     private void logout(){
     	SharedPreferences userData = getSharedPreferences("UserFile", 0);
 		SharedPreferences.Editor editor = userData.edit();
@@ -356,5 +360,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 }
+
 
 
